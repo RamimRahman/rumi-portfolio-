@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Md Rahman (Rumi) | IT & Engineering Placement Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="IT / Engineering placement portfolio of Md Rahman (Rumi) — Computer Science student focused on systems, automation, security awareness, and practical problem solving." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#070A0F;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+      --text:#E9EDF6;
+      --muted: rgba(233,237,246,.72);
+      --muted2: rgba(233,237,246,.58);
+      --accent:#6EE7F9;
+      --accent2:#A78BFA;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);background:var(--bg);scroll-behavior:smooth}
+    a{color:inherit;text-decoration:none}
+    ul{margin:0;padding-left:18px}
+    .container{max-width:var(--max);margin:0 auto;padding:0 18px}
+
+    .page-bg{
+      position:fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(1100px 500px at 18% 8%, rgba(110,231,249,.18), transparent 55%),
+        radial-gradient(900px 420px at 78% 12%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(900px 520px at 50% 78%, rgba(110,231,249,.08), transparent 65%),
+        linear-gradient(180deg, #06080E 0%, #070A0F 55%, #06080E 100%);
+    }
+    .noise-overlay{
+      position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.10;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(7,10,15,.55);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-container{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .logo{display:flex; align-items:center; gap:10px; user-select:none}
+    .logo-mark{
+      width:34px; height:34px; display:grid; place-items:center;
+      border-radius:12px;
+      background: linear-gradient(135deg, rgba(110,231,249,.18), rgba(167,139,250,.18));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      font-weight:700;
+    }
+    .logo-text{font-weight:700; letter-spacing:.3px}
+    .logo-dot{color:var(--accent)}
+
+    .nav-links{display:flex; gap:18px; align-items:center}
+    .nav-links a{
+      font-size:14px; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+      transition: all .18s ease;
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      border-color: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      font-weight:600; font-size:14px;
+      gap:10px;
+    }
+    .btn:hover{transform:translateY(-1px); border-color: rgba(255,255,255,.18)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(110,231,249,.20), rgba(167,139,250,.20));
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    }
+    .btn.ghost{background: rgba(255,255,255,.04)}
+    .btn.small{padding:10px 12px; font-size:13px}
+
+    .section{padding:86px 0}
+    .section-alt{background: rgba(255,255,255,.02); border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06)}
+    .section-title{font-size:34px; margin:0 0 10px; letter-spacing:.2px}
+    .section-subtitle{margin:0; color:var(--muted); line-height:1.7}
+    .center{text-align:center}
+    .glass{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+    }
+
+    .hero{padding:86px 0 66px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .85fr;
+      gap:28px;
+      align-items:center;
+    }
+    .hero-eyebrow{
+      margin:0 0 12px;
+      color: rgba(110,231,249,.9);
+      font-weight:600;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    h1{margin:0 0 10px; font-size:54px; line-height:1.05}
+    .accent{
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .hero-role{
+      display:flex; align-items:center; gap:8px;
+      margin:14px 0 10px; font-family: "Source Code Pro", monospace;
+      color: rgba(233,237,246,.85);
+      font-size:16px;
+    }
+    .terminal-prefix{color: rgba(110,231,249,.85)}
+    .terminal-cursor{opacity:.9; animation: blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:.2}}
+
+    .hero-summary{margin:10px 0 18px; color:var(--muted); line-height:1.8; max-width:58ch}
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin:18px 0 14px}
+    .hero-meta{display:flex; flex-wrap:wrap; gap:12px; color:var(--muted2); font-size:13px}
+    .hero-meta span{
+      padding:8px 10px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+
+    .cyber-orbit{position:relative; height:360px}
+    .core-card{
+      position:absolute; inset:0; margin:auto;
+      width: 100%;
+      max-width: 360px;
+      height: 220px;
+      border-radius: 26px;
+      display:flex; flex-direction:column; justify-content:center;
+      padding:22px;
+      background: linear-gradient(135deg, rgba(110,231,249,.14), rgba(167,139,250,.12));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+    }
+    .core-icon{font-size:26px; margin-bottom:10px}
+    .core-title{font-weight:700; font-size:18px; margin-bottom:6px}
+    .core-subtitle{color: rgba(233,237,246,.72); font-size:13px; line-height:1.5}
+
+    .orbit{position:absolute; inset:0; margin:auto; border-radius:999px; border:1px dashed rgba(255,255,255,.14); opacity:.55}
+    .orbit-1{width: 360px; height: 360px; animation: spin 18s linear infinite}
+    .orbit-2{width: 290px; height: 290px; animation: spin 14s linear reverse infinite}
+    .orbit-3{width: 220px; height: 220px; animation: spin 10s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .floating-tag{
+      position:absolute;
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:12px; color: rgba(233,237,246,.86);
+      backdrop-filter: blur(10px);
+    }
+    .tag-1{top:22px; left:22px}
+    .tag-2{top:40px; right:26px}
+    .tag-3{bottom:42px; left:24px}
+    .tag-4{bottom:22px; right:18px}
+
+    .split{display:grid; grid-template-columns: 1.2fr .8fr; gap:22px; align-items:start}
+    .info-card{padding:22px}
+    .info-card h3{margin:0 0 10px}
+    .info-list{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+    .label{color: rgba(233,237,246,.62)}
+    .link-inline{display:inline-block; margin-top:14px; color: rgba(110,231,249,.9)}
+    .link-inline:hover{text-decoration:underline}
+
+    .skills-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:24px}
+    .skill-card{padding:22px}
+    .skill-card h3{margin:0 0 10px}
+    .skill-card ul{color: var(--muted); line-height:1.9}
+
+    .timeline{margin-top:22px; display:grid; gap:16px}
+    .timeline-item{display:grid; grid-template-columns: 14px 1fr; gap:14px; align-items:start}
+    .timeline-dot{
+      width:14px; height:14px; border-radius:999px;
+      background: linear-gradient(135deg, rgba(110,231,249,.9), rgba(167,139,250,.9));
+      box-shadow: 0 10px 26px rgba(0,0,0,.45);
+      margin-top:10px;
+    }
+    .timeline-content{
+      padding:18px 20px;
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .timeline-content h3{margin:0 0 6px}
+    .item-meta{margin:0 0 10px; color: var(--muted2); font-size:13px}
+    .item-body{margin:0; color: var(--muted); line-height:1.8}
+    .pill-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    .pill{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: rgba(233,237,246,.78);
+    }
+    .pill.large{padding:10px 12px; font-size:13px}
+
+    .experience-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:22px}
+    .exp-card{padding:22px}
+    .exp-card h3{margin:0 0 6px}
+    .exp-card ul{margin-top:10px; color: var(--muted); line-height:1.9}
+
+    .projects-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:22px}
+    .project-card{padding:22px; position:relative}
+    .project-tag{
+      position:absolute; top:18px; right:18px;
+      font-size:12px; padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(233,237,246,.78);
+    }
+    .project-card h3{margin:0 0 10px}
+    .project-card p{margin:0 0 10px; color: var(--muted); line-height:1.8}
+    .project-meta{color: rgba(233,237,246,.62); font-size:13px}
+
+    .contact-grid{display:grid; grid-template-columns: 1.05fr .95fr; gap:18px; align-items:start}
+    .contact-list{list-style:none; padding:0; margin:14px 0 0; display:grid; gap:10px; color: var(--muted)}
+    .contact-list a{color: rgba(110,231,249,.9)}
+    .contact-list a:hover{text-decoration:underline}
+    .contact-right{padding:22px}
+    .contact-form h3{margin:0 0 12px}
+    .form-row{display:grid; gap:8px; margin-bottom:12px}
+    label{font-size:13px; color: rgba(233,237,246,.72)}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline:none;
+      font-family: inherit;
+    }
+    input:focus, textarea:focus{border-color: rgba(110,231,249,.35)}
+    .form-note{margin:10px 0 0; font-size:12px; color: var(--muted2)}
+
+    .site-footer{padding:26px 0; border-top:1px solid rgba(255,255,255,.06); color: var(--muted2)}
+    .footer-inner{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; font-size:13px}
+
+    .reveal{opacity:0; transform: translateY(12px); transition: all .55s ease}
+    .reveal.visible{opacity:1; transform:none}
+
+    @media (max-width: 980px){
+      h1{font-size:46px}
+      .hero-grid{grid-template-columns: 1fr; gap:18px}
+      .split{grid-template-columns: 1fr}
+      .skills-grid, .experience-grid, .projects-grid{grid-template-columns: 1fr}
+      .contact-grid{grid-template-columns: 1fr}
+      .cyber-orbit{height:320px}
+      .nav-links{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-bg"></div>
+  <div class="noise-overlay"></div>
+
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <span class="logo-mark">◆</span>
+        <span class="logo-text">RUMI<span class="logo-dot">.</span></span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="btn small ghost" href="#contact">Let’s Talk</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <p class="hero-eyebrow">Computer Science • IT Engineering • Automation & Security Awareness</p>
+          <h1>Hi, I’m <span class="accent">Md Rahman<br />Rumi</span></h1>
+
+          <p class="hero-role">
+            <span class="terminal-prefix">&gt;</span>
+            <span id="typewriter" class="typewriter"></span>
+            <span class="terminal-cursor">█</span>
+          </p>
+
+          <p class="hero-summary">
+            I’m a Computer Science student at London South Bank University, applying for an 11-month placement
+            where I can build real experience in IT engineering. I enjoy problem-solving, learning new tools quickly,
+            and understanding how technology supports business operations and customer experience. Alongside my studies,
+            I work on e-commerce and digital content, and I volunteer in outreach that teaches online safety and cyber awareness.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn primary">Contact Me</a>
+            <a href="#projects" class="btn ghost">View Projects</a>
+            <!-- Add your real CV link here if you want -->
+            <a href="#" class="btn ghost" target="_blank" rel="noopener noreferrer">Download CV</a>
+          </div>
+
+          <div class="hero-meta">
+            <span>📍 London, UK</span>
+            <span>🎓 BSc Computer Science</span>
+            <span>💼 IT / Engineering Placement Applicant</span>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="cyber-orbit parallax">
+            <div class="core-card">
+              <div class="core-icon">🧩</div>
+              <div class="core-title">IT Engineering Focus</div>
+              <div class="core-subtitle">Automation • Systems • Security Awareness • Business IT</div>
+            </div>
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
+            <div class="floating-tag tag-1">Python</div>
+            <div class="floating-tag tag-2">Java</div>
+            <div class="floating-tag tag-3">Excel</div>
+            <div class="floating-tag tag-4">Linux</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container split">
+        <div class="split-left reveal">
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">
+            I’ve always been interested in how technology works behind the scenes — and how it helps real organisations run smoothly.
+            I learn best by doing: building, testing, and improving things until they work properly.
+          </p>
+          <p class="section-subtitle" style="margin-top:14px;">
+            Outside university, I’ve built practical skills through e-commerce and digital marketing work (product research, listings,
+            AI-assisted content and Excel stock tracking). I also volunteer in outreach, teaching basic cyber security and online safety
+            to school students and wider groups. I’m now looking for a placement where I can learn fast, contribute to a team, and build
+            confidence in professional IT engineering work.
+          </p>
+        </div>
+
+        <div class="split-right reveal">
+          <div class="info-card glass">
+            <h3 style="margin:0 0 10px;">Quick Info</h3>
+            <ul class="info-list">
+              <li><span class="label">Location:</span> London, UK</li>
+              <li><span class="label">University:</span> London South Bank University</li>
+              <li><span class="label">Degree:</span> BSc Computer Science</li>
+              <li><span class="label">Focus:</span> IT Engineering • Automation • Security Awareness</li>
+              <li><span class="label">Strengths:</span> Problem solving • Teamwork • Clear communication</li>
+            </ul>
+            <a href="#contact" class="link-inline">Open to placement opportunities →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title center">Skills</h2>
+        <p class="section-subtitle center">
+          Practical tools and skills from university, outreach, and real work in e-commerce and customer-facing environments.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skill-card reveal glass">
+            <h3>Technical & Tools</h3>
+            <ul>
+              <li>Java • Python • Git/GitHub</li>
+              <li>Linux fundamentals • OS & networking concepts</li>
+              <li>Excel & Word (tracking, reporting, documentation)</li>
+              <li>AI tools for research, content and image generation</li>
+              <li>Photoshop • Illustrator • Canva • Adobe Acrobat</li>
+              <li>CapCut (short-form video editing & framing)</li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal glass">
+            <h3>Work Skills</h3>
+            <ul>
+              <li>Product research, listing optimisation & analysis</li>
+              <li>Customer service and communication under pressure</li>
+              <li>Problem solving and troubleshooting mindset</li>
+              <li>Time management and meeting deadlines</li>
+              <li>Teamwork and working across priorities</li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal glass">
+            <h3>Interests</h3>
+            <ul>
+              <li>Automation and improving workflows</li>
+              <li>Security awareness and online safety</li>
+              <li>How IT supports business and customer experience</li>
+              <li>Gaming with friends (teamwork & strategy)</li>
+              <li>Motorbike riding (focus & balance)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <div class="container">
+        <h2 class="section-title center">Education</h2>
+
+        <div class="timeline reveal">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>BSc Computer Science</h3>
+              <p class="item-meta">London South Bank University — Present</p>
+              <p class="item-body">
+                Building foundations in software development and core computing, including OOP (Java), Operating Systems,
+                Data Networks and security-focused learning. Developing practical skills through projects, labs and society work,
+                with a focus on applying technology in real business environments.
+              </p>
+              <div class="pill-row">
+                <span class="pill">OOP (Java)</span>
+                <span class="pill">Operating Systems</span>
+                <span class="pill">Data Networks</span>
+                <span class="pill">Cyber Security</span>
+                <span class="pill">Software Engineering</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>St. Gregory’s High School &amp; College</h3>
+              <p class="item-meta">Volunteering &amp; Extracurricular Activities — 2017–2020</p>
+              <p class="item-body">
+                Active member of IT, Science and Ecology clubs, participating in team competitions and supporting the organisation
+                of school events and festivals. Built early teamwork, organisation and event coordination skills through regular group work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title center">Experience</h2>
+
+        <div class="experience-grid">
+          <div class="exp-card reveal glass">
+            <h3>MEAMO LTD — Digital Marketing &amp; E-commerce Assistant</h3>
+            <p class="item-meta">2024–Present</p>
+            <ul>
+              <li>Create product images and listing assets using AI tools and design software.</li>
+              <li>Research products and competitors, supporting product R&amp;D and listing improvements.</li>
+              <li>Write and optimise titles/descriptions for e-commerce platforms using AI-assisted workflows.</li>
+              <li>Track stock and basic performance data using Excel and maintain organised records.</li>
+              <li>Support campaign launches for seasonal occasions; improved selected listings by updating titles and images, contributing to stronger sales.</li>
+              <li>Handle online customer enquiries with clear, professional responses.</li>
+            </ul>
+          </div>
+
+          <div class="exp-card reveal glass">
+            <h3>Domino’s Pizza — Customer Experience Crew Member</h3>
+            <p class="item-meta">Basildon (Laindon) · Aug 2024–Present</p>
+            <ul>
+              <li>Played an active role in a fast-paced team environment, communicating clearly to keep service running smoothly during busy periods.</li>
+              <li>Used POS systems to process payments accurately while maintaining focus under time pressure.</li>
+              <li>Supported daily operations including order packing, cleaning, hygiene standards and shift priorities.</li>
+              <li>Assisted with stock checks and restocking to keep service running consistently.</li>
+            </ul>
+          </div>
+
+          <div class="exp-card reveal glass">
+            <h3>LSBU — CSI Outreach Student Ambassador</h3>
+            <p class="item-meta">2025–Present (Volunteer)</p>
+            <ul>
+              <li>Represent LSBU at outreach events on and off campus, working with schools and colleges.</li>
+              <li>Deliver interactive sessions for school students, teaching basic cyber security and promoting online safety and digital wellbeing.</li>
+              <li>Support hands-on activities (including LEGO-based learning) to explain technology and problem-solving in an accessible way.</li>
+              <li>Support widening participation by encouraging students from diverse backgrounds and answering questions clearly.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="experience-grid" style="margin-top:18px;">
+          <div class="exp-card reveal glass" style="grid-column:1 / -1;">
+            <h3>LSBU — Zero Day Cyber Security Society</h3>
+            <p class="item-meta">Digital Outreach &amp; Campaign Lead (Volunteer) · 2025–Present</p>
+            <ul>
+              <li>Manage the society’s social media platforms and keep pages active and up to date.</li>
+              <li>Create posters, short videos and announcements to promote events and cyber awareness topics.</li>
+              <li>Work with the committee team to plan events and coordinate online promotion before and after sessions.</li>
+              <li>Maintain a positive and supportive online presence focused on awareness, safety and student wellbeing.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title center">Projects</h2>
+        <p class="section-subtitle center">
+          A few examples of the kind of work I enjoy — practical, hands-on and focused on learning by building.
+        </p>
+
+        <div class="projects-grid">
+          <div class="project-card reveal glass">
+            <div class="project-tag">Java</div>
+            <h3>OOP Coursework Projects</h3>
+            <p>
+              Built object-oriented programs using classes, constructors and encapsulation, improving debugging habits
+              and clean code structure.
+            </p>
+            <p class="project-meta">Focus: OOP • problem solving • readable code</p>
+          </div>
+
+          <div class="project-card reveal glass">
+            <div class="project-tag">Systems</div>
+            <h3>Linux &amp; Raspberry Pi Work</h3>
+            <p>
+              Worked in Linux environments for coursework and practical tasks, building confidence with system setup,
+              troubleshooting and how software interacts with hardware.
+            </p>
+            <p class="project-meta">Focus: Linux • troubleshooting • practical systems</p>
+          </div>
+
+          <div class="project-card reveal glass">
+            <div class="project-tag">Networking</div>
+            <h3>Packet &amp; Network Analysis</h3>
+            <p>
+              Practised analysing traffic and protocol behaviour as part of networks learning, building a stronger
+              foundation for security awareness.
+            </p>
+            <p class="project-meta">Focus: protocols • data flow • security basics</p>
+          </div>
+        </div>
+
+        <div class="pill-row reveal" style="justify-content:center; margin-top:18px;">
+          <span class="pill large">Placement Interests: Platform • Data &amp; Automation • Security • Software</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div class="contact-left reveal">
+          <h2 class="section-title">Let’s Connect</h2>
+          <p class="section-subtitle">
+            I’m currently applying for IT / Engineering placement roles. If you’d like to chat about a placement opportunity,
+            please get in touch.
+          </p>
+
+          <ul class="contact-list">
+            <li><span class="label">Email:</span> <a href="mailto:ramim3.1416@gmail.com">ramim3.1416@gmail.com</a></li>
+            <li><span class="label">Phone:</span> <a href="tel:+447342344156">+44 07342 344156</a></li>
+            <li><span class="label">LinkedIn:</span> <a href="https://linkedin.com/in/mdrahman56" target="_blank" rel="noreferrer">linkedin.com/in/mdrahman56</a></li>
+            
+          </ul>
+
+          <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn primary" href="mailto:ramim3.1416@gmail.com">Email Me</a>
+            <a class="btn ghost" href="#top">Back to top</a>
+          </div>
+        </div>
+
+        <div class="contact-right reveal glass">
+          <form class="contact-form" onsubmit="return false;">
+            <h3>Quick Message </h3>
+            <div class="form-row">
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="Your name" />
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="your@email.com" />
+            </div>
+            <div class="form-row">
+              <label for="message">Message</label>
+              <textarea id="message" rows="4" placeholder="Write a short message..."></textarea>
+            </div>
+            <button class="btn primary" type="submit">Send (not active)</button>
+            <p class="form-note">To make this work, connect it to a simple form service or backend.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Md Rahman (Rumi)</span>
+      <span>Built for IT / Engineering placement applications</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const lines = [
+      "IT / Engineering placement applicant",
+      "Computer Science @ LSBU",
+      "Automation • Systems • Security awareness",
+      "E-commerce ops + content + data tracking",
+      "Outreach: teaching online safety in schools"
+    ];
+
+    const el = document.getElementById("typewriter");
+    let i=0, j=0, deleting=false;
+
+    function tick(){
+      const text = lines[i];
+      if(!deleting){
+        el.textContent = text.slice(0, j++);
+        if(j > text.length){ deleting=true; setTimeout(tick, 900); return; }
+      }else{
+        el.textContent = text.slice(0, j--);
+        if(j < 0){ deleting=false; i=(i+1)%lines.length; j=0; }
+      }
+      setTimeout(tick, deleting ? 35 : 55);
+    }
+    tick();
+
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("visible");
+      });
+    }, {threshold: .12});
+    document.querySelectorAll(".reveal").forEach(node=>obs.observe(node));
+
+    const parallax = document.querySelector(".parallax");
+    window.addEventListener("mousemove", (e)=>{
+      if(!parallax) return;
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      parallax.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  </script>
+</body>
+</html>
