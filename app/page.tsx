@@ -137,10 +137,94 @@ const origins = [
   },
 ];
 
+const recommendations = [
+  {
+    name: "MD Rakib Hasan",
+    title: "Lead Representative · LSBU Computer Science & Digital Technologies",
+    relationship: "ZeroDay & LSBU teammate",
+    quote: "Rumi brings good energy while always staying professional. He is reliable, punctual, takes responsibility and always gives his best.",
+    url: "https://www.linkedin.com/in/md-rakib-hasan-481a7726a/",
+  },
+  {
+    name: "Sayra Begum",
+    title: "First-Class Business Graduate · Sales Associate at ASICS EMEA",
+    relationship: "Senior university colleague",
+    quote: "His positive attitude and willingness to support others make him a valued colleague and friend.",
+    url: "https://www.linkedin.com/in/sayra-begum-11551b251/",
+  },
+  {
+    name: "Aaron Gillich",
+    title: "Professor of Building Performance & Policy",
+    relationship: "LSBU event partner",
+    quote: "Rumi was absolutely brilliant. He helped create a welcoming atmosphere and fun events that were a big hit with our guests.",
+    url: "https://www.linkedin.com/in/aaron-gillich-2b430215/",
+  },
+  {
+    name: "Joshua Owolabi",
+    title: "London University Student · Encode community peer",
+    relationship: "Worked together at Encode",
+    quote: "We shared great ideas together, and he is definitely someone with great vision.",
+    url: "https://www.linkedin.com/in/joshua-owolabi-227671175/",
+  },
+  {
+    name: "Esra Alioglu, MSc",
+    title: "MSc Artificial Intelligence Student · IT Graduate",
+    relationship: "Student Ambassador manager",
+    quote: "He makes people feel comfortable, communicates confidently and always represents the university positively.",
+    url: "https://www.linkedin.com/in/esra-alioglu-msc-642911203/",
+  },
+  {
+    name: "Asma Akter",
+    title: "Entrepreneur & Mentor",
+    relationship: "Entrepreneurship mentor",
+    quote: "He is accountable, enthusiastic and open-minded, with a genuine passion for learning and sharing knowledge.",
+    url: "https://www.linkedin.com/in/asma-akter-5bb92b2aa/",
+  },
+  {
+    name: "Ramya Shree Babu",
+    title: "Data Science Student · Data Analytics Intern",
+    relationship: "Student Ambassador teammate",
+    quote: "His communication skills, willingness to help and ability to take initiative make him a valuable asset to any team.",
+    url: "https://www.linkedin.com/in/ramyashree07/",
+  },
+  {
+    name: "Md Mujaheed Shahariar Riad",
+    title: "Computer Science Student · Data Analytics & FinTech",
+    relationship: "CSI Ambassador & ZeroDay teammate",
+    quote: "He brings positive energy to every project, keeps everyone motivated and always makes sure everyone’s ideas are heard.",
+    url: "https://www.linkedin.com/in/enthusiastsrd/",
+  },
+];
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Md Rahman",
+  alternateName: "Rumi Rahman",
+  url: "https://md-rahman-cyber-portfolio.rumi56.chatgpt.site",
+  sameAs: ["https://www.linkedin.com/in/mdrahman56"],
+  jobTitle: "Digital Marketing, Creative Technology & Community Leadership Professional",
+  description:
+    "London-based Computer Science undergraduate working across digital marketing, content creation, product optimisation, AI integration, community leadership and cybersecurity awareness.",
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "London South Bank University",
+  },
+  knowsAbout: skills,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "London",
+    addressCountry: "GB",
+  },
+};
+
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [lightMode, setLightMode] = useState(false);
   const [activeLens, setActiveLens] = useState<LensKey>("creative");
+  const [activeRecommendation, setActiveRecommendation] = useState(0);
+  const [recommendationsPaused, setRecommendationsPaused] = useState(false);
+  const [recommendationEngaged, setRecommendationEngaged] = useState(false);
 
   useEffect(() => {
     const page = pageRef.current;
@@ -169,10 +253,41 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (
+      recommendationsPaused ||
+      recommendationEngaged ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setActiveRecommendation((current) => (current + 1) % recommendations.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [activeRecommendation, recommendationEngaged, recommendationsPaused]);
+
   const lens = lenses[activeLens];
+  const recommendation = recommendations[activeRecommendation];
+
+  const showPreviousRecommendation = () => {
+    setActiveRecommendation((current) =>
+      current === 0 ? recommendations.length - 1 : current - 1,
+    );
+  };
+
+  const showNextRecommendation = () => {
+    setActiveRecommendation((current) => (current + 1) % recommendations.length);
+  };
 
   return (
     <div className="site" data-theme={lightMode ? "light" : "dark"} ref={pageRef}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       <div className="progress" aria-hidden="true" />
       <div className="cursor-glow" aria-hidden="true" />
 
@@ -185,6 +300,7 @@ export default function Home() {
           <a href="#profile">Profile</a>
           <a href="#work">Work</a>
           <a href="#experience">Experience</a>
+          <a href="#voices">Voices</a>
         </nav>
         <div className="nav-actions">
           <button
@@ -206,8 +322,9 @@ export default function Home() {
         <section className="hero" id="top">
           <div className="hero-grid" aria-hidden="true" />
           <div className="hero-copy">
-            <div className="eyebrow"><span /> LONDON · OPEN TO OPPORTUNITIES</div>
+            <div className="eyebrow"><span /> MD RAHMAN · LONDON · OPEN TO OPPORTUNITIES</div>
             <h1>
+              <small>DIGITAL MARKETING × CREATIVE TECHNOLOGY × LEADERSHIP</small>
               I build attention
               <span>into momentum.</span>
             </h1>
@@ -221,6 +338,8 @@ export default function Home() {
 
           <div className="identity-stage" aria-label="Interactive MD Rahman identity sculpture">
             <div className="stage-index">PORTFOLIO / 2026</div>
+            <div className="stage-proof proof-left"><strong>08</strong><span>LINKEDIN<br />RECOMMENDATIONS</span></div>
+            <div className="stage-proof proof-right"><strong>922</strong><span>FOLLOWERS<br />& GROWING</span></div>
             <div className="orbit orbit-one" aria-hidden="true"><span>CREATIVE</span></div>
             <div className="orbit orbit-two" aria-hidden="true"><span>LEADERSHIP</span></div>
             <div className="orbit orbit-three" aria-hidden="true"><span>TECHNOLOGY</span></div>
@@ -393,15 +512,84 @@ export default function Home() {
             <p>London South Bank University</p>
             <div className="education-meta"><span>LONDON, UK</span><span>BUILDING THE NEXT CHAPTER</span></div>
           </div>
-          <figure className="quote-card">
-            <blockquote>
-              “Rumi brings good energy while always staying professional. He is reliable, punctual, takes responsibility and always gives his best.”
-            </blockquote>
-            <figcaption>
-              <strong>MD RAKIB HASAN</strong>
-              <span>Worked together at ZeroDay events & LSBU Open Days</span>
-            </figcaption>
-          </figure>
+        </section>
+
+        <section
+          className="recommendations-section"
+          id="voices"
+          onMouseEnter={() => setRecommendationEngaged(true)}
+          onMouseLeave={() => setRecommendationEngaged(false)}
+          onFocusCapture={() => setRecommendationEngaged(true)}
+          onBlurCapture={() => setRecommendationEngaged(false)}
+          aria-labelledby="recommendations-title"
+        >
+          <div className="recommendations-intro">
+            <div className="section-label"><span>09</span> PROFESSIONAL RECOMMENDATIONS</div>
+            <p className="recommendations-kicker">REAL WORDS · REAL WORK · LINKEDIN VERIFIED</p>
+            <h2 id="recommendations-title">
+              People who’ve worked with Rumi say he makes the <em>team stronger.</em>
+            </h2>
+            <div className="recommendations-summary">
+              <p>
+                Eight recommendations. Different roles and relationships. One consistent signal: Rumi shows up with energy, responsibility and care for the people around him.
+              </p>
+              <a href="https://www.linkedin.com/in/mdrahman56/details/recommendations/" target="_blank" rel="noreferrer">
+                VIEW ON LINKEDIN ↗
+              </a>
+            </div>
+          </div>
+
+          <div className="recommendations-player">
+            <aside className="recommendation-sidebar" aria-label="Choose a recommendation">
+              {recommendations.map((item, index) => (
+                <button
+                  type="button"
+                  key={item.name}
+                  className={activeRecommendation === index ? "active" : ""}
+                  aria-pressed={activeRecommendation === index}
+                  onClick={() => setActiveRecommendation(index)}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span><strong>{item.name}</strong><small>{item.relationship}</small></span>
+                </button>
+              ))}
+            </aside>
+
+            <article
+              className={`recommendation-card recommendation-${(activeRecommendation % 4) + 1}`}
+              aria-live="polite"
+              key={recommendation.name}
+            >
+              <div className="recommendation-topline">
+                <span>WHAT PEOPLE SAY</span>
+                <span>{String(activeRecommendation + 1).padStart(2, "0")} / {String(recommendations.length).padStart(2, "0")}</span>
+              </div>
+              <div className="recommendation-mark" aria-hidden="true">“</div>
+              <blockquote>“{recommendation.quote}”</blockquote>
+              <footer className="recommendation-person">
+                <a href={recommendation.url} target="_blank" rel="noreferrer">
+                  <strong>{recommendation.name}</strong>
+                  <span>{recommendation.title}</span>
+                </a>
+                <small>{recommendation.relationship} · LinkedIn recommendation</small>
+              </footer>
+              <div className="recommendation-controls">
+                <button type="button" onClick={showPreviousRecommendation} aria-label="Show previous recommendation">←</button>
+                <button
+                  type="button"
+                  onClick={() => setRecommendationsPaused((current) => !current)}
+                  aria-label={recommendationsPaused ? "Resume automatic recommendations" : "Pause automatic recommendations"}
+                  aria-pressed={recommendationsPaused}
+                >
+                  {recommendationsPaused ? "PLAY" : "PAUSE"}
+                </button>
+                <button type="button" onClick={showNextRecommendation} aria-label="Show next recommendation">→</button>
+              </div>
+              <div className={`recommendation-timer ${recommendationsPaused || recommendationEngaged ? "paused" : ""}`} aria-hidden="true">
+                <i key={activeRecommendation} />
+              </div>
+            </article>
+          </div>
         </section>
 
         <section className="contact-section" id="contact">
