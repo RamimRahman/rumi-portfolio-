@@ -2,442 +2,422 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const impactStories = [
-  {
-    number: "01",
-    sector: "Leadership / Insight",
-    title: "Turning student voices into useful action.",
-    organisation: "London South Bank University",
-    summary:
-      "As Lead Representative, I gather different perspectives, find the signal in the feedback and communicate it to the people who can create change.",
-    contribution: ["Stakeholder communication", "Insight synthesis", "Representation"],
-    accent: "lime",
-  },
-  {
-    number: "02",
-    sector: "Business / Digital",
-    title: "Improving the way products show up online.",
-    organisation: "MEAMO LTD",
-    summary:
-      "I combine research, AI-assisted workflows, visual judgement and operational detail to make e-commerce content clearer and more effective.",
-    contribution: ["Product research", "Content optimisation", "Digital operations"],
-    accent: "blue",
-  },
-  {
-    number: "03",
-    sector: "Community / Technology",
-    title: "Making technical ideas feel human.",
-    organisation: "Cyber outreach & Zero Day",
-    summary:
-      "From online safety sessions to student campaigns, I translate complex ideas into experiences that people can understand, trust and act on.",
-    contribution: ["Public speaking", "Campaign thinking", "Accessible learning"],
-    accent: "orange",
-  },
-];
+type LensKey = "creative" | "leadership" | "technology";
 
-const timeline = [
+const lenses: Record<
+  LensKey,
+  { number: string; kicker: string; title: string; copy: string; skills: string[] }
+> = {
+  creative: {
+    number: "01",
+    kicker: "Make people look",
+    title: "Creative",
+    copy: "I shape ideas into visual stories, campaigns and digital experiences that feel clear, current and worth remembering.",
+    skills: ["Content creation", "Graphic design", "Video editing", "Social media", "Visual branding"],
+  },
+  leadership: {
+    number: "02",
+    kicker: "Make people move",
+    title: "Leadership",
+    copy: "I bring people together, turn feedback into action and keep the details moving—from student representation to award-winning communities.",
+    skills: ["Stakeholder engagement", "Public speaking", "Team coordination", "Outreach", "Project management"],
+  },
+  technology: {
+    number: "03",
+    kicker: "Make systems smarter",
+    title: "Technology",
+    copy: "I use computing, AI-assisted workflows and digital risk thinking to simplify work, improve products and make technical ideas human.",
+    skills: ["AI integration", "Product optimisation", "Cyber awareness", "Digital research", "Automation"],
+  },
+};
+
+const experience = [
   {
-    date: "2026 — NOW",
+    period: "APR — JUL 2026",
     role: "Lead Representative",
-    place: "LSBU · School of Computer Science & Digital Technologies",
-    type: "Leadership",
+    organisation: "London South Bank University",
+    type: "Leadership · Part-time",
+    summary: "Represented Computer Science and Digital Technologies students, bringing course representatives, academic staff and the Students’ Union into one clearer feedback loop.",
   },
   {
-    date: "2026 — NOW",
+    period: "DEC 2025 — JUL 2026",
+    role: "CSI Ambassador",
+    organisation: "London South Bank University",
+    type: "Outreach · Contract",
+    summary: "Made cyber awareness, online safety and digital wellbeing practical and accessible through student-facing outreach.",
+  },
+  {
+    period: "APR — JUL 2026",
     role: "Hub Scholar",
-    place: "Encode Club",
-    type: "Community",
+    organisation: "Encode Club",
+    type: "Community · Contract",
+    summary: "Helped deliver high-impact hackathons, workshops and community experiences connecting developers, builders and startup founders.",
   },
   {
-    date: "2025 — NOW",
-    role: "CSI Outreach Student Ambassador",
-    place: "London South Bank University",
-    type: "Communication",
+    period: "AUG 2025 — JUL 2026",
+    role: "Founder · Social Media & Outreach Officer",
+    organisation: "LSBU ZeroDay",
+    type: "Community · Campaigns",
+    summary: "Built the club’s digital presence and helped turn an idea into an award-winning student community through content, events, workshops and campaigns.",
   },
   {
-    date: "2025 — NOW",
+    period: "NOV 2024 — JUL 2026",
+    role: "Customer Experience Crew Member",
+    organisation: "Domino’s",
+    type: "Operations · Part-time",
+    summary: "Worked across customer service, ordering systems, POS and live restaurant operations—building speed, judgement and calm teamwork under pressure.",
+  },
+  {
+    period: "2024 — FEB 2026",
     role: "Digital Marketing & Social Media Assistant",
-    place: "MEAMO LTD",
-    type: "Business",
-  },
-  {
-    date: "2025 — NOW",
-    role: "Founder · Digital Outreach & Campaign Lead",
-    place: "Zero Day: Cyber Security",
-    type: "Initiative",
+    organisation: "Meamo",
+    type: "Digital · Volunteer",
+    summary: "Created AI-assisted visuals, improved product listings and explored product research, branding and e-commerce ideas for a growing business.",
   },
 ];
 
-const principles = [
+const impact = [
   {
-    number: "01",
-    word: "Listen",
-    copy: "Understand the people, the goal and the reality behind the request.",
+    index: "A",
+    category: "Community",
+    title: "From an idea to an award.",
+    copy: "ZeroDay grew into a place where students could learn, connect and build confidence in cybersecurity—recognised with LSBU Group’s 2026 Extra-Curricular Activity of the Year award.",
+    proof: "Award-winning team",
   },
   {
-    number: "02",
-    word: "Analyse",
-    copy: "Separate assumptions from evidence and find the pattern that matters.",
+    index: "B",
+    category: "Outreach",
+    title: "Technical ideas, made human.",
+    copy: "A London Building Futures outreach story brought digital safety and opportunity into a wider conversation, reaching 941 LinkedIn impressions.",
+    proof: "941 impressions",
   },
   {
-    number: "03",
-    word: "Design",
-    copy: "Shape a practical response that is clear, useful and considerate.",
-  },
-  {
-    number: "04",
-    word: "Deliver",
-    copy: "Communicate well, follow through and keep improving the outcome.",
+    index: "C",
+    category: "Digital business",
+    title: "Better product stories.",
+    copy: "At Meamo, product research, visual judgement and AI-assisted content came together to make listings clearer, sharper and more useful.",
+    proof: "Research × creative",
   },
 ];
 
-const toolkit = [
+const skills = [
+  "Social media marketing",
+  "Product optimisation",
+  "Stakeholder engagement",
+  "AI integration & automation",
+  "Community building",
+  "Graphic design",
+  "Digital risk awareness",
+  "Content creation",
+  "Team leadership",
+  "Public speaking",
+  "Project management",
+  "Customer experience",
+  "Video editing",
+  "Canva & Photoshop",
+  "Problem solving",
   "Business analysis",
-  "Research & synthesis",
-  "AI-assisted workflows",
-  "Digital strategy",
-  "Content & visual design",
-  "Excel & reporting",
-  "Stakeholder communication",
-  "Cybersecurity awareness",
+];
+
+const origins = [
+  {
+    year: "2019 — 2021",
+    title: "School Ambassador & Outreach Lead",
+    copy: "Led open days, community events and educational initiatives at St. Gregory’s High School & College.",
+  },
+  {
+    year: "2018 — 2019",
+    title: "President, Science Club",
+    copy: "Organised science fairs, STEM activities and technology exhibitions that made learning collaborative.",
+  },
+  {
+    year: "2015 — 2018",
+    title: "Builder from the beginning",
+    copy: "Created an award-winning automated irrigation system using programming and sensors, alongside coding workshops and science projects.",
+  },
 ];
 
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [lightMode, setLightMode] = useState(false);
+  const [activeLens, setActiveLens] = useState<LensKey>("creative");
 
   useEffect(() => {
     const page = pageRef.current;
     if (!page) return;
 
-    const updatePointer = (event: PointerEvent) => {
+    const move = (event: PointerEvent) => {
       const x = event.clientX / window.innerWidth;
       const y = event.clientY / window.innerHeight;
-      page.style.setProperty("--pointer-x", `${(x * 100).toFixed(2)}%`);
-      page.style.setProperty("--pointer-y", `${(y * 100).toFixed(2)}%`);
-      page.style.setProperty("--tilt-x", `${((0.5 - y) * 3.5).toFixed(2)}deg`);
-      page.style.setProperty("--tilt-y", `${((x - 0.5) * 6).toFixed(2)}deg`);
+      page.style.setProperty("--mx", `${(x * 100).toFixed(2)}%`);
+      page.style.setProperty("--my", `${(y * 100).toFixed(2)}%`);
+      page.style.setProperty("--rx", `${((0.5 - y) * 9).toFixed(2)}deg`);
+      page.style.setProperty("--ry", `${((x - 0.5) * 12).toFixed(2)}deg`);
     };
 
-    const updateScroll = () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
-      page.style.setProperty("--scroll-progress", `${(progress * 100).toFixed(2)}%`);
+    const scroll = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      page.style.setProperty("--progress", `${max > 0 ? (scrollY / max) * 100 : 0}%`);
     };
 
-    window.addEventListener("pointermove", updatePointer, { passive: true });
-    window.addEventListener("scroll", updateScroll, { passive: true });
-    updateScroll();
-
+    window.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("scroll", scroll, { passive: true });
+    scroll();
     return () => {
-      window.removeEventListener("pointermove", updatePointer);
-      window.removeEventListener("scroll", updateScroll);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("scroll", scroll);
     };
   }, []);
 
-  return (
-    <div
-      className="portfolio"
-      data-theme={lightMode ? "light" : "dark"}
-      ref={pageRef}
-    >
-      <div className="page-progress" aria-hidden="true" />
-      <div className="ambient-light" aria-hidden="true" />
+  const lens = lenses[activeLens];
 
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="MD Rahman — home">
-          <span>MD</span>
-          <strong>RAHMAN</strong>
+  return (
+    <div className="site" data-theme={lightMode ? "light" : "dark"} ref={pageRef}>
+      <div className="progress" aria-hidden="true" />
+      <div className="cursor-glow" aria-hidden="true" />
+
+      <header className="nav-shell">
+        <a className="brand" href="#top" aria-label="MD Rahman home">
+          <span>MR</span>
+          <strong>MD RAHMAN</strong>
         </a>
         <nav aria-label="Main navigation">
-          <a href="#about">About</a>
-          <a href="#work">Impact</a>
+          <a href="#profile">Profile</a>
+          <a href="#work">Work</a>
           <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
         </nav>
-        <div className="header-actions">
+        <div className="nav-actions">
           <button
-            className="theme-switch"
+            className="theme-toggle"
             type="button"
-            onClick={() => setLightMode((value) => !value)}
-            aria-label={`Switch to ${lightMode ? "dark" : "light"} theme`}
-            aria-pressed={lightMode}
+            onClick={() => setLightMode((current) => !current)}
+            aria-label={`Use ${lightMode ? "dark" : "light"} mode`}
           >
-            <span className="theme-icon" aria-hidden="true">
-              <i />
-            </span>
-            {lightMode ? "Dark" : "Light"}
+            <i aria-hidden="true" />
+            {lightMode ? "DARK" : "LIGHT"}
           </button>
-          <a className="header-cta" href="mailto:ramim3.1416@gmail.com">
-            Start a conversation <span aria-hidden="true">↗</span>
+          <a className="nav-linkedin" href="https://linkedin.com/in/mdrahman56" target="_blank" rel="noreferrer">
+            LINKEDIN ↗
           </a>
         </div>
       </header>
 
       <main>
         <section className="hero" id="top">
-          <div className="hero-pattern" aria-hidden="true">
-            <span className="pattern-square square-one" />
-            <span className="pattern-square square-two" />
-            <span className="pattern-line" />
-          </div>
-
+          <div className="hero-grid" aria-hidden="true" />
           <div className="hero-copy">
-            <div className="availability">
-              <i aria-hidden="true" />
-              Open to 2026 placement opportunities
-            </div>
-            <p className="hero-discipline">Technology × Business × People</p>
+            <div className="eyebrow"><span /> LONDON · OPEN TO OPPORTUNITIES</div>
             <h1>
-              Ideas into
-              <span>impact.</span>
+              I build attention
+              <span>into momentum.</span>
             </h1>
-            <p className="hero-summary">
-              I&apos;m MD Rahman—a Computer Science undergraduate who brings together
-              analytical thinking, digital creativity and human communication to make
-              complex things clearer and more useful.
-            </p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#work">
-                See selected impact <span aria-hidden="true">↓</span>
-              </a>
-              <a
-                className="button button-quiet"
-                href="https://linkedin.com/in/mdrahman56"
-                target="_blank"
-                rel="noreferrer"
-              >
-                LinkedIn <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-            <div className="hero-roles" aria-label="Professional focus areas">
-              <span>Business analysis</span>
-              <span>Digital strategy</span>
-              <span>Emerging technology</span>
+            <div className="hero-bottom">
+              <p>
+                Creative thinker, community builder and Computer Science undergraduate working where digital culture, business and technology meet.
+              </p>
+              <a className="round-arrow" href="#profile" aria-label="Explore the portfolio">↓</a>
             </div>
           </div>
 
-          <div className="portrait-scene">
-            <div className="portrait-depth depth-back" aria-hidden="true" />
-            <div className="portrait-depth depth-mid" aria-hidden="true" />
-            <figure className="portrait-frame">
-              <img
-                src="/md-rahman-portrait.png"
-                alt="MD Rahman standing in a contemporary black and ivory studio portrait"
-                width="1024"
-                height="1536"
-                fetchPriority="high"
-              />
-              <div className="portrait-shade" aria-hidden="true" />
-            </figure>
-            <div className="portrait-label label-top" aria-hidden="true">
-              <span>Independent thinker</span>
-              <strong>01 — 26</strong>
-            </div>
-            <div className="portrait-label label-side" aria-hidden="true">
-              Strategy · Technology · Communication
-            </div>
-            <div className="portrait-stamp" aria-hidden="true">
-              <span>MR</span>
-              <small>London / Essex</small>
-            </div>
-          </div>
-
-          <div className="hero-footnote">
-            <span>Scroll to explore</span>
-            <i aria-hidden="true" />
-            <span>Portfolio / 2026</span>
-          </div>
-        </section>
-
-        <section className="statement light-section" id="about">
-          <div className="statement-index">01 / Point of view</div>
-          <p className="statement-lead">
-            The best technology starts with a better understanding of
-            <em> people.</em>
-          </p>
-          <div className="statement-grid">
-            <div className="statement-aside">
-              <span>My perspective</span>
-              <div className="micro-diagram" aria-hidden="true">
-                <i /><i /><i />
-                <b>+</b>
+          <div className="identity-stage" aria-label="Interactive MD Rahman identity sculpture">
+            <div className="stage-index">PORTFOLIO / 2026</div>
+            <div className="orbit orbit-one" aria-hidden="true"><span>CREATIVE</span></div>
+            <div className="orbit orbit-two" aria-hidden="true"><span>LEADERSHIP</span></div>
+            <div className="orbit orbit-three" aria-hidden="true"><span>TECHNOLOGY</span></div>
+            <div className="identity-core" aria-hidden="true">
+              <div className="cube">
+                <div className="cube-face face-front">MR</div>
+                <div className="cube-face face-back">IDEA</div>
+                <div className="cube-face face-right">MOVE</div>
+                <div className="cube-face face-left">MAKE</div>
+                <div className="cube-face face-top">GROW</div>
+                <div className="cube-face face-bottom">2026</div>
               </div>
             </div>
-            <div className="statement-copy">
-              <p>
-                I&apos;m interested in the space where systems, decisions and human
-                behaviour meet. That is why my experience moves across student
-                leadership, technology outreach, digital business and content.
-              </p>
-              <p>
-                I ask questions, look for patterns and translate what I learn into a
-                clear next step. Cybersecurity is part of that journey—not the boundary
-                of it.
-              </p>
+            <div className="stage-note">MOVE YOUR CURSOR <span>↗</span></div>
+          </div>
+        </section>
+
+        <div className="signal-strip" aria-label="Professional focus">
+          <div className="signal-track">
+            <span>SOCIAL MEDIA & DIGITAL MARKETING</span><i>✦</i>
+            <span>CONTENT CREATION</span><i>✦</i>
+            <span>PRODUCT OPTIMISATION</span><i>✦</i>
+            <span>AI INTEGRATION & AUTOMATION</span><i>✦</i>
+            <span>CYBER AWARENESS & DIGITAL RISK</span><i>✦</i>
+            <span>SOCIAL MEDIA & DIGITAL MARKETING</span><i>✦</i>
+            <span>CONTENT CREATION</span><i>✦</i>
+          </div>
+        </div>
+
+        <section className="proof-bar" aria-label="LinkedIn profile highlights">
+          <div><strong>500+</strong><span>CONNECTIONS</span></div>
+          <div><strong>922</strong><span>FOLLOWERS</span></div>
+          <div><strong>32</strong><span>SKILL AREAS</span></div>
+          <div><strong>08</strong><span>RECOMMENDATIONS</span></div>
+        </section>
+
+        <section className="profile-section" id="profile">
+          <div className="section-label"><span>01</span> THE PROFILE</div>
+          <div className="profile-statement">
+            <p className="lead-in">I don’t fit inside one job title.</p>
+            <h2>
+              I connect <em>people</em>, shape <em>ideas</em> and use <em>technology</em> to make both move further.
+            </h2>
+          </div>
+          <div className="profile-note">
+            <span>THE SHORT VERSION</span>
+            <p>
+              At LSBU and beyond, I’ve represented students, built communities, supported tech events, created digital content and improved customer and product experiences. The thread through all of it is simple: understand what matters, communicate it clearly, then make something useful happen.
+            </p>
+          </div>
+        </section>
+
+        <section className="lens-section" aria-labelledby="lens-title">
+          <div className="lens-intro">
+            <div className="section-label"><span>02</span> THREE LENSES</div>
+            <h2 id="lens-title">One profile.<br />Three ways of thinking.</h2>
+          </div>
+          <div className="lens-interface">
+            <div className="lens-tabs" role="tablist" aria-label="Professional lenses">
+              {(Object.keys(lenses) as LensKey[]).map((key) => (
+                <button
+                  key={key}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeLens === key}
+                  className={activeLens === key ? "active" : ""}
+                  onClick={() => setActiveLens(key)}
+                >
+                  <span>{lenses[key].number}</span>{lenses[key].title}
+                </button>
+              ))}
             </div>
-            <div className="statement-fact">
-              <strong>AAA</strong>
-              <span>A Levels · Science</span>
-              <small>Foundation in evidence and structured thinking</small>
+            <div className={`lens-panel lens-${activeLens}`} role="tabpanel">
+              <div className="lens-orb" aria-hidden="true"><span>{lens.number}</span></div>
+              <div className="lens-content">
+                <span className="lens-kicker">{lens.kicker}</span>
+                <h3>{lens.title}</h3>
+                <p>{lens.copy}</p>
+                <div className="lens-skills">
+                  {lens.skills.map((skill) => <span key={skill}>{skill}</span>)}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="impact-section" id="work">
-          <div className="section-header">
-            <div>
-              <span className="section-index">02 / Selected impact</span>
-              <h2>Work that moves<br />something forward.</h2>
-            </div>
+        <section className="award-section" id="work">
+          <div className="award-mark" aria-hidden="true"><span>✦</span></div>
+          <div className="award-copy">
+            <div className="section-label section-label-light"><span>03</span> FEATURED STORY</div>
+            <p className="award-kicker">LSBU GROUP EDUCATION AWARDS · 2026</p>
+            <h2>From an idea<br />to an <em>award.</em></h2>
             <p>
-              Not just tasks completed—examples of how I think, contribute and create
-              value across different environments.
+              ZeroDay began with a belief that cybersecurity should feel open, practical and connected. Through outreach, content, workshops and a committed team, it became an award-winning student community.
             </p>
-          </div>
-
-          <div className="impact-list">
-            {impactStories.map((story) => (
-              <article className={`impact-card impact-${story.accent}`} key={story.number}>
-                <div className="impact-meta">
-                  <span>{story.number}</span>
-                  <p>{story.sector}</p>
-                </div>
-                <div className="impact-visual" aria-hidden="true">
-                  <span className="visual-number">{story.number}</span>
-                  <i className="visual-disc disc-one" />
-                  <i className="visual-disc disc-two" />
-                  <b>MR</b>
-                </div>
-                <div className="impact-copy">
-                  <p className="impact-org">{story.organisation}</p>
-                  <h3>{story.title}</h3>
-                  <p className="impact-summary">{story.summary}</p>
-                  <ul aria-label="Key contribution areas">
-                    {story.contribution.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
+            <div className="award-footer">
+              <strong>EXTRA-CURRICULAR<br />ACTIVITY OF THE YEAR</strong>
+              <span>LEARN / BUILD / DEFEND</span>
+            </div>
           </div>
         </section>
 
-        <section className="process-section light-section">
-          <div className="section-header process-header">
-            <div>
-              <span className="section-index">03 / How I think</span>
-              <h2>Clarity is a<br />competitive advantage.</h2>
-            </div>
-            <p>
-              My approach borrows from business analysis, design thinking and everyday
-              common sense.
-            </p>
+        <section className="impact-section">
+          <div className="impact-heading">
+            <div className="section-label"><span>04</span> SELECTED IMPACT</div>
+            <h2>Work with a pulse.</h2>
+            <p>Different environments. The same instinct: find the signal and make it useful.</p>
           </div>
-          <div className="process-grid">
-            {principles.map((principle) => (
-              <article className="process-card" key={principle.number}>
-                <div className="process-top">
-                  <span>{principle.number}</span>
-                  <i aria-hidden="true" />
-                </div>
-                <h3>{principle.word}</h3>
-                <p>{principle.copy}</p>
+          <div className="impact-grid">
+            {impact.map((item) => (
+              <article className="impact-card" key={item.index}>
+                <div className="impact-card-top"><span>{item.index}</span><i>{item.category}</i></div>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+                <div className="impact-proof">{item.proof}<span>↗</span></div>
               </article>
             ))}
           </div>
         </section>
 
         <section className="experience-section" id="experience">
-          <div className="experience-intro">
-            <span className="section-index">04 / Experience</span>
-            <h2>A career already<br />in motion.</h2>
-            <p>
-              Building range through leadership, digital work, technology education and
-              community contribution.
-            </p>
+          <div className="experience-heading">
+            <div className="section-label section-label-light"><span>05</span> EXPERIENCE</div>
+            <h2>Proof across<br />different rooms.</h2>
           </div>
-          <div className="timeline">
-            {timeline.map((item, index) => (
-              <article className="timeline-row" key={`${item.role}-${item.place}`}>
-                <span className="timeline-number">0{index + 1}</span>
-                <p className="timeline-date">{item.date}</p>
-                <div>
-                  <h3>{item.role}</h3>
-                  <p>{item.place}</p>
-                </div>
-                <span className="timeline-type">{item.type}</span>
+          <div className="experience-list">
+            {experience.map((item, index) => (
+              <article className="experience-row" key={`${item.role}-${item.organisation}`}>
+                <span className="experience-number">{String(index + 1).padStart(2, "0")}</span>
+                <div className="experience-main"><h3>{item.role}</h3><p>{item.organisation}</p></div>
+                <div className="experience-detail"><span>{item.period}</span><span>{item.type}</span></div>
+                <p className="experience-summary">{item.summary}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="toolkit-section light-section">
-          <div className="toolkit-title">
-            <span className="section-index">05 / Capability</span>
-            <h2>Useful range.<br /><em>One point of view.</em></h2>
+        <section className="origins-section">
+          <div className="origins-heading">
+            <div className="section-label"><span>06</span> THE ORIGIN STORY</div>
+            <h2>Leadership didn’t start with a job title.</h2>
           </div>
-          <div className="toolkit-marquee" aria-hidden="true">
-            <span>THINK</span><i>+</i><span>MAKE</span><i>+</i><span>EXPLAIN</span><i>+</i>
-          </div>
-          <div className="toolkit-grid">
-            {toolkit.map((item, index) => (
-              <div className="tool-item" key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <p>{item}</p>
-                <i aria-hidden="true">↗</i>
-              </div>
+          <div className="origins-list">
+            {origins.map((item, index) => (
+              <article key={item.title}>
+                <div className="origin-line"><span>{String(index + 1).padStart(2, "0")}</span><i /></div>
+                <p className="origin-year">{item.year}</p>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </article>
             ))}
           </div>
-          <div className="education-panel">
-            <div>
-              <span>Education</span>
-              <h3>BSc Computer Science</h3>
-              <p>London South Bank University · Year 2 · 2024—Present</p>
-            </div>
-            <div className="language-block">
-              <span>Languages</span>
-              <p>English · Bangla · Hindi</p>
-            </div>
+        </section>
+
+        <section className="skills-section">
+          <div className="skills-head">
+            <div className="section-label"><span>07</span> CAPABILITY SYSTEM</div>
+            <p>Not a keyword wall. A connected set of ways I create value.</p>
           </div>
+          <div className="skills-cloud">
+            {skills.map((skill, index) => <span className={`skill skill-${(index % 4) + 1}`} key={skill}>{skill}</span>)}
+          </div>
+        </section>
+
+        <section className="education-quote">
+          <div className="education-card">
+            <div className="section-label section-label-light"><span>08</span> EDUCATION</div>
+            <div className="education-year">2024<br />— 2027</div>
+            <h2>BSc Computer Science</h2>
+            <p>London South Bank University</p>
+            <div className="education-meta"><span>LONDON, UK</span><span>BUILDING THE NEXT CHAPTER</span></div>
+          </div>
+          <figure className="quote-card">
+            <blockquote>
+              “Rumi brings good energy while always staying professional. He is reliable, punctual, takes responsibility and always gives his best.”
+            </blockquote>
+            <figcaption>
+              <strong>MD RAKIB HASAN</strong>
+              <span>Worked together at ZeroDay events & LSBU Open Days</span>
+            </figcaption>
+          </figure>
         </section>
 
         <section className="contact-section" id="contact">
-          <div className="contact-pattern" aria-hidden="true">
-            <i /><i /><i /><i />
+          <div className="contact-rings" aria-hidden="true"><span /><span /><span /></div>
+          <div className="contact-copy">
+            <p>HAVE AN IDEA, ROLE OR CONVERSATION?</p>
+            <h2>Let’s make<br /><em>something move.</em></h2>
+            <a href="mailto:ramim3.1416@gmail.com">START A CONVERSATION <span>↗</span></a>
           </div>
-          <span className="section-index">06 / Next chapter</span>
-          <p className="contact-eyebrow">Have an opportunity—or an ambitious problem?</p>
-          <h2>Let&apos;s make<br /><em>something matter.</em></h2>
-          <p className="contact-copy">
-            I&apos;m seeking a year-in-industry placement where I can learn quickly,
-            contribute thoughtfully and grow across technology and business.
-          </p>
-          <div className="contact-actions">
-            <a className="contact-email" href="mailto:ramim3.1416@gmail.com">
-              ramim3.1416@gmail.com <span aria-hidden="true">↗</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/mdrahman56"
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>
-          </div>
+          <footer>
+            <div className="brand"><span>MR</span><strong>MD RAHMAN</strong></div>
+            <p>LONDON · UNITED KINGDOM</p>
+            <div><a href="https://linkedin.com/in/mdrahman56" target="_blank" rel="noreferrer">LINKEDIN ↗</a><a href="#top">BACK TO TOP ↑</a></div>
+          </footer>
         </section>
       </main>
-
-      <footer>
-        <div className="wordmark footer-wordmark">
-          <span>MD</span>
-          <strong>RAHMAN</strong>
-        </div>
-        <p>Technology · Business · People</p>
-        <p>Essex, United Kingdom</p>
-        <a href="#top">Back to top ↑</a>
-      </footer>
     </div>
   );
 }
