@@ -5,12 +5,12 @@ import Link from "next/link";
 import type { Experience } from "../../portfolio-data";
 
 export default function DetailClient({ experience }: { experience: Experience }) {
-  const [lightMode, setLightMode] = useState(false);
+  const [lightMode, setLightMode] = useState(true);
 
   useEffect(() => {
     const saved = window.localStorage.getItem("rumi-theme");
     const timer = window.setTimeout(() => {
-      if (saved === "light") setLightMode(true);
+      if (saved === "dark") setLightMode(false);
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
@@ -27,7 +27,7 @@ export default function DetailClient({ experience }: { experience: Experience })
       <header className="detail-nav">
         <Link className="brand" href="/" aria-label="Return to Rumi's portfolio"><span>R</span><strong>RUMI</strong></Link>
         <div className="detail-nav-actions">
-          <button className="detail-theme-button" type="button" onClick={switchTheme} aria-label={`Switch to ${lightMode ? "dark" : "light"} mode`}><span className="theme-core" aria-hidden="true"><i /><b /></span></button>
+          <button type="button" onClick={switchTheme} aria-label={`Switch to ${lightMode ? "dark" : "light"} mode`}>{lightMode ? "☾" : "☀"}</button>
           <Link href="/">Close story ×</Link>
         </div>
       </header>
