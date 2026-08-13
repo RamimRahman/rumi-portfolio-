@@ -2,6 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
+  FaFacebookF,
+  FaGithub,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTiktok,
+} from "react-icons/fa6";
+import { PiMicrosoftOutlookLogoFill, PiMicrosoftTeamsLogoFill } from "react-icons/pi";
+import { SiGmail, SiZoom } from "react-icons/si";
+import {
   coreSkills,
   education,
   experiences,
@@ -10,6 +19,22 @@ import {
 } from "./portfolio-data";
 
 const currentExperiences = experiences.filter((item) => item.status === "Current");
+
+const roleSignals = [
+  "Lead Representative",
+  "CSI Outreach Ambassador",
+  "Digital Marketing",
+  "Creative Technology",
+  "Encode Hub Scholar",
+  "ZeroDay Founder",
+];
+
+const organisations = [
+  { mark: "LSBU", name: "London South Bank University", area: "Leadership · Outreach" },
+  { mark: "M", name: "Meamo", area: "Digital · E-commerce" },
+  { mark: "EC", name: "Encode Club", area: "Technology · Community" },
+  { mark: "ZD", name: "LSBU ZeroDay", area: "Campaigns · Events" },
+];
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -23,6 +48,14 @@ const personSchema = {
     jobTitle: "Digital Marketing, Creative Technology & Community Leadership Professional",
     description:
       "London-based Computer Science undergraduate combining digital marketing, content creation, product optimisation, AI-assisted workflows and community leadership.",
+    worksFor: {
+      "@type": "Organization",
+      name: "Meamo",
+    },
+    memberOf: [
+      { "@type": "Organization", name: "LSBU ZeroDay" },
+      { "@type": "Organization", name: "Encode Club" },
+    ],
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "London South Bank University",
@@ -127,8 +160,8 @@ export default function Home() {
         </nav>
         <div className="top-actions">
           <button className="theme-button" type="button" onClick={switchTheme} aria-label={`Switch to ${lightMode ? "dark" : "light"} mode`}>
-            <span aria-hidden="true">{lightMode ? "☾" : "☀"}</span>
-            <i>{lightMode ? "DARK" : "LIGHT"}</i>
+            <span className="theme-core" aria-hidden="true"><i /><b /></span>
+            <span className="theme-label"><small>MODE</small><strong>{lightMode ? "LIGHT" : "DARK"}</strong></span>
           </button>
           <a className="cv-button" href="/rumi-rahman-cv.pdf" download>
             CV <span aria-hidden="true">↓</span>
@@ -152,12 +185,24 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-signal" aria-label="Interactive Rumi identity graphic">
-            <div className="signal-label">CREATIVE × PEOPLE × TECHNOLOGY</div>
-            <div className="signal-orbit orbit-a"><span>LISTEN</span></div>
-            <div className="signal-orbit orbit-b"><span>BUILD</span></div>
-            <div className="signal-core"><span>R</span><i>IDEAS<br />IN MOTION</i></div>
-            <div className="signal-proof"><strong>08</strong><span>REAL LINKEDIN<br />RECOMMENDATIONS</span></div>
+          <div className="hero-tech" aria-label="Rumi's idea-to-impact working system">
+            <div className="tech-header"><span>RUMI.OS</span><i>LIVE SYSTEM</i></div>
+            <div className="tech-scanner" aria-hidden="true" />
+            <div className="tech-map">
+              <div className="tech-path" aria-hidden="true" />
+              <div className="tech-node tech-node-1"><span>01</span><div><strong>LISTEN</strong><small>Understand people</small></div></div>
+              <div className="tech-node tech-node-2"><span>02</span><div><strong>CONNECT</strong><small>Find the clear idea</small></div></div>
+              <div className="tech-node tech-node-3"><span>03</span><div><strong>BUILD</strong><small>Make it useful</small></div></div>
+              <div className="tech-node tech-node-4"><span>04</span><div><strong>IMPROVE</strong><small>Learn and move forward</small></div></div>
+            </div>
+            <div className="tech-result"><span>R</span><div><small>OUTPUT</small><strong>IDEAS → IMPACT</strong></div></div>
+            <div className="tech-proof"><strong>08</strong><span>REAL LINKEDIN<br />RECOMMENDATIONS</span></div>
+          </div>
+        </section>
+
+        <section className="role-marquee" aria-label="Rumi's professional focus">
+          <div className="role-marquee-track">
+            {[...roleSignals, ...roleSignals].map((role, index) => <span key={`${role}-${index}`}>{role}<i>✦</i></span>)}
           </div>
         </section>
 
@@ -168,10 +213,25 @@ export default function Home() {
           <div><strong>5</strong><span>Current roles</span></div>
         </section>
 
+        <section className="organisation-strip" aria-labelledby="organisation-title">
+          <div className="organisation-intro"><span>TRUSTED TO CONTRIBUTE ACROSS</span><h2 id="organisation-title">Education, technology and growing communities.</h2></div>
+          <div className="organisation-grid">
+            {organisations.map((organisation) => (
+              <article key={organisation.name}>
+                <span>{organisation.mark}</span>
+                <div><strong>{organisation.name}</strong><small>{organisation.area}</small></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="about" id="about">
           <div className="section-tag"><span>01</span> RUMI IN 30 SECONDS</div>
           <div className="about-main">
-            <h2>Curious enough to ask why.<br />Practical enough to ask <em>what next?</em></h2>
+            <h2>
+              <span>Curious enough to ask <strong>why.</strong></span>
+              <span>Practical enough to ask <em>what next?</em></span>
+            </h2>
             <p>
               Rumi is at his best when people, ideas and technology need to work together. He listens first, explains things simply and keeps moving until the idea becomes useful.
             </p>
@@ -283,15 +343,15 @@ export default function Home() {
             <a className="contact-link" href="https://www.linkedin.com/in/mdrahman56" target="_blank" rel="noreferrer"><span>in</span><strong>LinkedIn</strong><i>↗</i></a>
           </div>
           <div className="social-dock" aria-label="Social profiles">
-            <a href="mailto:ramim3.1416@gmail.com" aria-label="Email Rumi"><span>M</span><small>Gmail</small></a>
-            <a href="https://www.linkedin.com/in/mdrahman56" target="_blank" rel="noreferrer" aria-label="Rumi on LinkedIn"><span>in</span><small>LinkedIn</small></a>
-            <button type="button" disabled title="Profile link coming soon"><span>◎</span><small>Instagram</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>♪</span><small>TikTok</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>f</span><small>Facebook</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>O</span><small>Outlook</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>T</span><small>Teams</small></button>
-            <button type="button" disabled title="Booking link coming soon"><span>Z</span><small>Zoom</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>GH</span><small>GitHub</small></button>
+            <a href="mailto:ramim3.1416@gmail.com" aria-label="Email Rumi"><SiGmail aria-hidden="true" /><small>Gmail</small></a>
+            <a href="https://www.linkedin.com/in/mdrahman56" target="_blank" rel="noreferrer" aria-label="Rumi on LinkedIn"><FaLinkedinIn aria-hidden="true" /><small>LinkedIn</small></a>
+            <button type="button" disabled title="Profile link coming soon"><FaInstagram aria-hidden="true" /><small>Instagram</small></button>
+            <button type="button" disabled title="Profile link coming soon"><FaTiktok aria-hidden="true" /><small>TikTok</small></button>
+            <button type="button" disabled title="Profile link coming soon"><FaFacebookF aria-hidden="true" /><small>Facebook</small></button>
+            <button type="button" disabled title="Profile link coming soon"><PiMicrosoftOutlookLogoFill aria-hidden="true" /><small>Outlook</small></button>
+            <button type="button" disabled title="Profile link coming soon"><PiMicrosoftTeamsLogoFill aria-hidden="true" /><small>Teams</small></button>
+            <button type="button" disabled title="Booking link coming soon"><SiZoom aria-hidden="true" /><small>Zoom</small></button>
+            <button type="button" disabled title="Profile link coming soon"><FaGithub aria-hidden="true" /><small>GitHub</small></button>
           </div>
           <footer className="footer"><div className="brand"><span>R</span><strong>RUMI</strong></div><p>MD SHAH HABIBUR RAHMAN · LONDON, UK</p><a href="#top">Back to top ↑</a></footer>
         </section>
