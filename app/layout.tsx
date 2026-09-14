@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://md-rahman-cyber-portfolio.rumi56.chatgpt.site"),
+  metadataBase: new URL("https://rumi-portfolio-tau.vercel.app"),
   title: "Rumi | Digital Marketing, Creative Technology & Leadership",
   description:
     "Meet Md Shah Habibur Rahman, known as Rumi: a London-based Computer Science undergraduate building useful work across digital marketing, creative technology and community leadership.",

@@ -19,7 +19,7 @@ const personSchema = {
     "@type": "Person",
     name: "Md Shah Habibur Rahman",
     alternateName: ["Rumi", "Md Rahman", "Rumi Rahman"],
-    url: "https://md-rahman-cyber-portfolio.rumi56.chatgpt.site",
+    url: "https://rumi-portfolio-tau.vercel.app",
     sameAs: socialLinks.filter((link) => link.name !== "LinkedIn").map((link) => link.href),
     jobTitle: "Digital Marketing, Creative Technology & Community Leadership Professional",
     description:

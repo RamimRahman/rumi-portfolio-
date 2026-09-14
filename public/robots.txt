@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://md-rahman-cyber-portfolio.rumi56.chatgpt.site/sitemap.xml
+Sitemap: https://rumi-portfolio-tau.vercel.app/sitemap.xml
