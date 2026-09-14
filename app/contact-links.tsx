@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
 
 const icons: Record<string, ReactNode> = {
+  Download: <><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></>,
+  Student: <><path d="m2 8 10-5 10 5-10 5-10-5Zm4 3v6c4 3 8 3 12 0v-6m4-3v9"/></>,
+  Union: <><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3m1-17a3 3 0 0 1 0 6m3 11v-3a6 6 0 0 0-2-4"/></>,
   LinkedIn: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7m0-10v.1M11 17v-7m0 3c0-4 6-4 6 0v4"/></>,
   Facebook: <path d="M14 21v-8h3l.5-4H14V7c0-1 .5-2 2-2h2V2h-3c-4 0-5 2-5 5v2H7v4h3v8"/>,
   Instagram: <><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></>,
@@ -29,8 +32,8 @@ export const socialLinks = [
 
 export const emailLinks = [
   { name: "Personal Gmail", address: "ramim3.1416@gmail.com", icon: "Email" },
-  { name: "Student email", address: "s4333763@lsbu.ac.uk", icon: "Email" },
-  { name: "Students’ Union", address: "rumi@lsbsu.org", icon: "Email" },
+  { name: "Student email", address: "s4333763@lsbu.ac.uk", icon: "Student" },
+  { name: "Students’ Union", address: "rumi@lsbsu.org", icon: "Union" },
   { name: "Teams email", address: "e413136@lsbu.ac.uk", icon: "Teams" },
 ];
 

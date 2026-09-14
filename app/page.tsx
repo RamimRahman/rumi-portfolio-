@@ -277,18 +277,19 @@ export default function Home() {
             <p>HAVE A ROLE, PROJECT OR QUESTION?</p>
             <h2>Let’s turn a quick hello into <em>something useful.</em></h2>
           </div>
-          <div className="connect-dashboard">
-            <a className="contact-primary" href="mailto:ramim3.1416@gmail.com"><ContactIcon name="Email" /><strong>Email Rumi</strong><i aria-hidden="true">↗</i></a>
-            <a className="contact-primary meeting" href={zoomRequest}><ContactIcon name="Zoom" /><div><strong>Book a Zoom meeting</strong><small>Request a time by email</small></div><i aria-hidden="true">↗</i></a>
-            <a className="contact-link" href="https://wa.me/447342344156" target="_blank" rel="noopener noreferrer"><ContactIcon name="WhatsApp" /><div><strong>Let’s chat on WhatsApp</strong><small>07342 344156</small></div><i aria-hidden="true">↗</i></a>
-            <a className="contact-link" href="tel:+447342344156"><ContactIcon name="Phone" /><div><strong>Give me a call</strong><small>+44 7342 344156</small></div><i aria-hidden="true">↗</i></a>
-          </div>
-          <div className="email-grid" aria-label="Email addresses">
-            {emailLinks.map((link) => <a key={link.address} href={`mailto:${link.address}`}><ContactIcon name={link.icon} /><div><span>{link.name}</span><strong>{link.address}</strong></div><span aria-hidden="true">↗</span></a>)}
-          </div>
-          <div className="social-heading"><h3>Find me online</h3><a href="/rumi-rahman-cv.pdf" download>Download résumé <span aria-hidden="true">↓</span></a></div>
-          <div className="social-dock" aria-label="Social profiles">
-            {socialLinks.map((link) => <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${link.name} (opens in a new tab)`}><ContactIcon name={link.name} /><small>{link.name}</small><span className="social-arrow" aria-hidden="true">↗</span></a>)}
+          <div className="contact-icons" aria-label="Social and contact links">
+            <div className="icon-group" role="group" aria-label="Social profiles">
+              {socialLinks.map((link) => <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${link.name} (opens in a new tab)`} title={link.name}><ContactIcon name={link.name} /></a>)}
+            </div>
+            <div className="icon-group" role="group" aria-label="Email addresses">
+              {emailLinks.map((link) => <a key={link.address} href={`mailto:${link.address}`} aria-label={`${link.name}: ${link.address}`} title={`${link.name}: ${link.address}`}><ContactIcon name={link.icon} /></a>)}
+            </div>
+            <div className="icon-group" role="group" aria-label="Chat, call or meet">
+              <a href="https://wa.me/447342344156" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp: 07342 344156" title="WhatsApp: 07342 344156"><ContactIcon name="WhatsApp" /></a>
+              <a href="tel:+447342344156" aria-label="Call: 07342 344156" title="Call: 07342 344156"><ContactIcon name="Phone" /></a>
+              <a href={zoomRequest} aria-label="Request a Zoom meeting by email" title="Request a Zoom meeting by email"><ContactIcon name="Zoom" /></a>
+              <a href="/rumi-rahman-cv.pdf" download aria-label="Download résumé" title="Download résumé"><ContactIcon name="Download" /></a>
+            </div>
           </div>
           <footer className="footer"><div className="brand"><span>R</span><strong>RUMI</strong></div><p>MD SHAH HABIBUR RAHMAN · LONDON, UK</p><a href="#top">Back to top ↑</a></footer>
         </section>
