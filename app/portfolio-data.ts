@@ -15,6 +15,30 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
+    slug: "lsbu-energy-advice-centre",
+    role: "Community Energy Advice",
+    organisation: "Energy Advice Centre at LSBU",
+    period: "August 2026 — Present",
+    status: "Current",
+    kind: "Part-time · On-site",
+    simple: "I help local people understand their energy bills, use energy more efficiently and find the support available to them.",
+    story:
+      "At the LSBU Energy Advice Centre in London, Rumi supports the community with free, impartial energy guidance. He helps people understand household energy consumption and bills, offers practical recommendations to improve efficiency and reduce costs, and signposts clients to relevant grants, schemes and specialist services. Working alongside colleagues, he supports community engagement and an accessible, professional and confidential service.",
+    actions: [
+      "Explain household energy consumption and bills in clear, accessible language",
+      "Offer practical energy-efficiency and cost-saving guidance",
+      "Signpost clients to relevant grants, support schemes and specialist services",
+      "Support community engagement and collaborate with colleagues to provide confidential advice",
+    ],
+    outcomes: [
+      "Helps residents make informed choices about household energy use",
+      "Makes available support and specialist services easier to navigate",
+      "Supports an accessible, impartial service for the local community",
+    ],
+    skills: ["Community engagement", "Sustainability", "Energy efficiency", "Client communication", "Service signposting"],
+    accent: "cyan",
+  },
+  {
     slug: "lead-representative",
     role: "Lead Representative",
     organisation: "London South Bank University",

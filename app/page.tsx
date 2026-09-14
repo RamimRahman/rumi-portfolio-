@@ -166,7 +166,7 @@ export default function Home() {
           <div><strong>500+</strong><span>Connections</span></div>
           <div><strong>922</strong><span>Followers</span></div>
           <div><strong>1</strong><span>LSBU Group Award</span></div>
-          <div><strong>5</strong><span>Current roles</span></div>
+          <div><strong>{currentExperiences.length}</strong><span>Current roles</span></div>
         </section>
 
         <section className="about" id="about">
@@ -187,7 +187,7 @@ export default function Home() {
         <section className="now" id="now">
           <div className="section-heading">
             <div className="section-tag light"><span>02</span> WHAT RUMI IS BUILDING NOW</div>
-            <div><h2>Five roles.<br /><em>One clear direction.</em></h2><p>Short version here. Full story opens in a clean new page.</p></div>
+            <div><h2>{currentExperiences.length} roles.<br /><em>One clear direction.</em></h2><p>Short version here. Full story opens in a clean new page.</p></div>
           </div>
           <div className="role-grid">
             {currentExperiences.map((item, index) => (
