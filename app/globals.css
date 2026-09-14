@@ -246,7 +246,7 @@ button { font: inherit; }
 .connect-dashboard a:hover span { color: inherit; opacity: .7; }
 .connect-dashboard strong { font-size: clamp(1.15rem, 2vw, 2rem); letter-spacing: -.04em; }
 .connect-dashboard i { font-style: normal; font-size: 1.2rem; }
-.social-dock { margin-top: 1rem; display: grid; grid-template-columns: repeat(9, 1fr); gap: .45rem; }
+.social-dock { margin-top: 1rem; display: grid; grid-template-columns: repeat(6, 1fr); gap: .45rem; }
 .social-dock a, .social-dock button { min-height: 82px; padding: .7rem; display: flex; flex-direction: column; justify-content: space-between; align-items: start; color: var(--paper); background: var(--ink-2); border: 1px solid var(--line-dark); }
 .social-dock a { cursor: pointer; }
 .social-dock button { opacity: .48; cursor: not-allowed; }
@@ -403,3 +403,25 @@ button { font: inherit; }
   .loader { display: none; }
   .hero-signal { transform: none; }
 }
+
+/* Contact channels share the portfolio’s editorial grid and lime accent. */
+.connect-dashboard > a { grid-template-columns: 28px minmax(0, 1fr) auto; }
+.connect-dashboard small { display: block; margin-top: .55rem; color: var(--muted-dark); font-size: .8rem; }
+.connect-dashboard a:hover small { color: inherit; }
+.email-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; margin-top: .8rem; }
+.email-grid > a { min-height: 92px; display: flex; align-items: center; gap: 1rem; padding: 1.2rem; border: 1px solid var(--line-dark); transition: background .2s, color .2s; }
+.email-grid svg { flex-shrink: 0; }
+.email-grid a > div { min-width: 0; flex: 1; }
+.email-grid div span { display: block; color: var(--muted-dark); font-size: .75rem; margin-bottom: .5rem; }
+.email-grid strong { font-size: clamp(.85rem, 1.4vw, 1.15rem); overflow-wrap: anywhere; }
+.email-grid a:hover { background: var(--lime); color: var(--ink); }
+.email-grid a:hover div span { color: inherit; }
+.social-heading { margin-top: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.social-heading h3 { margin: 0; font-size: 1rem; }
+.social-heading > a { padding: .85rem 0; font-size: .8rem; text-decoration: underline; text-underline-offset: 4px; }
+.social-dock a { position: relative; min-height: 104px; padding: 1rem; transition: background .2s, color .2s; }
+.social-dock small { font-size: .72rem; }
+.social-arrow { position: absolute; top: 1rem; right: .85rem; font-size: .85rem !important; color: var(--muted-dark); }
+.social-dock a:hover .social-arrow { color: inherit; }
+.connect a:focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
+@media (max-width: 600px) { .email-grid { grid-template-columns: 1fr; } .social-dock a { min-height: 100px; } }

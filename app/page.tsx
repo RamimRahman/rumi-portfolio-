@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ContactIcon, emailLinks, socialLinks, zoomRequest } from "./contact-links";
 import {
   coreSkills,
   education,
@@ -19,7 +20,7 @@ const personSchema = {
     name: "Md Shah Habibur Rahman",
     alternateName: ["Rumi", "Md Rahman", "Rumi Rahman"],
     url: "https://md-rahman-cyber-portfolio.rumi56.chatgpt.site",
-    sameAs: ["https://www.linkedin.com/in/mdrahman56"],
+    sameAs: socialLinks.filter((link) => link.name !== "LinkedIn").map((link) => link.href),
     jobTitle: "Digital Marketing, Creative Technology & Community Leadership Professional",
     description:
       "London-based Computer Science undergraduate combining digital marketing, content creation, product optimisation, AI-assisted workflows and community leadership.",
@@ -277,21 +278,17 @@ export default function Home() {
             <h2>Let’s turn a quick hello into <em>something useful.</em></h2>
           </div>
           <div className="connect-dashboard">
-            <a className="contact-primary" href="mailto:ramim3.1416@gmail.com?subject=Hello%20Rumi%20%E2%80%94%20I%20have%20a%20question"><span>ASK ME SOMETHING</span><strong>Email Rumi</strong><i>↗</i></a>
-            <a className="contact-primary meeting" href="mailto:ramim3.1416@gmail.com?subject=Quick%20meeting%20with%20Rumi&body=Hi%20Rumi%2C%0A%0AI%27d%20like%20to%20arrange%20a%20quick%20Zoom%20or%20Teams%20meeting.%0A%0APreferred%20date%2Ftime%3A%20"><span>15-MINUTE INTRO</span><strong>Request a meeting</strong><i>↗</i></a>
-            <a className="contact-link" href="/rumi-rahman-cv.pdf" download><span>CV</span><strong>Download résumé</strong><i>↓</i></a>
-            <a className="contact-link" href="https://www.linkedin.com/in/mdrahman56" target="_blank" rel="noreferrer"><span>in</span><strong>LinkedIn</strong><i>↗</i></a>
+            <a className="contact-primary" href="mailto:ramim3.1416@gmail.com"><ContactIcon name="Email" /><strong>Email Rumi</strong><i aria-hidden="true">↗</i></a>
+            <a className="contact-primary meeting" href={zoomRequest}><ContactIcon name="Zoom" /><div><strong>Book a Zoom meeting</strong><small>Request a time by email</small></div><i aria-hidden="true">↗</i></a>
+            <a className="contact-link" href="https://wa.me/447342344156" target="_blank" rel="noopener noreferrer"><ContactIcon name="WhatsApp" /><div><strong>Let’s chat on WhatsApp</strong><small>07342 344156</small></div><i aria-hidden="true">↗</i></a>
+            <a className="contact-link" href="tel:+447342344156"><ContactIcon name="Phone" /><div><strong>Give me a call</strong><small>+44 7342 344156</small></div><i aria-hidden="true">↗</i></a>
           </div>
+          <div className="email-grid" aria-label="Email addresses">
+            {emailLinks.map((link) => <a key={link.address} href={`mailto:${link.address}`}><ContactIcon name={link.icon} /><div><span>{link.name}</span><strong>{link.address}</strong></div><span aria-hidden="true">↗</span></a>)}
+          </div>
+          <div className="social-heading"><h3>Find me online</h3><a href="/rumi-rahman-cv.pdf" download>Download résumé <span aria-hidden="true">↓</span></a></div>
           <div className="social-dock" aria-label="Social profiles">
-            <a href="mailto:ramim3.1416@gmail.com" aria-label="Email Rumi"><span>M</span><small>Gmail</small></a>
-            <a href="https://www.linkedin.com/in/mdrahman56" target="_blank" rel="noreferrer" aria-label="Rumi on LinkedIn"><span>in</span><small>LinkedIn</small></a>
-            <button type="button" disabled title="Profile link coming soon"><span>◎</span><small>Instagram</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>♪</span><small>TikTok</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>f</span><small>Facebook</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>O</span><small>Outlook</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>T</span><small>Teams</small></button>
-            <button type="button" disabled title="Booking link coming soon"><span>Z</span><small>Zoom</small></button>
-            <button type="button" disabled title="Profile link coming soon"><span>GH</span><small>GitHub</small></button>
+            {socialLinks.map((link) => <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${link.name} (opens in a new tab)`}><ContactIcon name={link.name} /><small>{link.name}</small><span className="social-arrow" aria-hidden="true">↗</span></a>)}
           </div>
           <footer className="footer"><div className="brand"><span>R</span><strong>RUMI</strong></div><p>MD SHAH HABIBUR RAHMAN · LONDON, UK</p><a href="#top">Back to top ↑</a></footer>
         </section>
