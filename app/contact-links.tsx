@@ -22,7 +22,7 @@ export function ContactIcon({ name }: { name: string }) {
 }
 
 export const socialLinks = [
-  { name: "LinkedIn", href: "https://www.linkedin.com/feed/" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/mdrahman56/" },
   { name: "Facebook", href: "https://www.facebook.com/rumi.rahman056" },
   { name: "Instagram", href: "https://www.instagram.com/rumi_rahman56/?hl=en" },
   { name: "GitHub", href: "https://github.com/RamimRahman" },

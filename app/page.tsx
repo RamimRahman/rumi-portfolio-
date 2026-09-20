@@ -40,6 +40,8 @@ const personSchema = {
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [lightMode, setLightMode] = useState(false);
+  const [experienceFilter, setExperienceFilter] = useState<"All" | "Current" | "Past">("All");
+  const visibleExperiences = experiences.filter((item) => experienceFilter === "All" || item.status === experienceFilter);
   const [journeyPaused, setJourneyPaused] = useState(false);
   const [loading, setLoading] = useState(true);
   const [activeRecommendation, setActiveRecommendation] = useState(0);
@@ -123,7 +125,7 @@ export default function Home() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#about">About</a>
-          <a href="#now">Now</a>
+          <a href="#now">Experience</a>
           <a href="#journey">Journey</a>
           <a href="#voices">Voices</a>
         </nav>
@@ -187,17 +189,30 @@ export default function Home() {
 
         <section className="now" id="now">
           <div className="section-heading">
-            <div className="section-tag light"><span>02</span> WHAT RUMI IS BUILDING NOW</div>
-            <div><h2>{currentExperiences.length} roles.<br /><em>One clear direction.</em></h2><p>Short version here. Full story opens in a clean new page.</p></div>
+            <div className="section-tag light"><span>02</span> WORK & COMMUNITY EXPERIENCE</div>
+            <div><h2>Different roles.<br /><em>One curious mind.</em></h2><p>From community leadership to creative technology. Explore the work, the people and the skills behind each chapter.</p></div>
           </div>
-          <div className="role-grid">
-            {currentExperiences.map((item, index) => (
+          <div className="experience-toolbar">
+            <div className="experience-filters" role="group" aria-label="Filter experience">
+              {(["All", "Current", "Past"] as const).map((filter) => (
+                <button key={filter} type="button" aria-pressed={experienceFilter === filter} aria-controls="experience-grid" onClick={() => setExperienceFilter(filter)}>
+                  {filter}<span>{filter === "All" ? experiences.length : experiences.filter((item) => item.status === filter).length}</span>
+                </button>
+              ))}
+            </div>
+            <a href="https://www.linkedin.com/in/mdrahman56/details/experience/" target="_blank" rel="noreferrer">View on LinkedIn ↗</a>
+          </div>
+          <p className="experience-count" role="status">Showing {visibleExperiences.length} {experienceFilter === "All" ? "roles" : `${experienceFilter.toLowerCase()} roles`}</p>
+          <div className="role-grid" id="experience-grid">
+            {visibleExperiences.map((item, index) => (
               <article className={`role-card accent-${item.accent}`} key={item.slug}>
-                <div className="role-top"><span>{String(index + 1).padStart(2, "0")}</span><i>● CURRENT</i></div>
+                <div className="role-top"><span>{String(index + 1).padStart(2, "0")}</span><i data-status={item.status}>{item.status === "Current" ? "● CURRENT" : "PAST EXPERIENCE"}</i></div>
                 <p className="role-kind">{item.kind}</p>
                 <h3>{item.role}</h3>
                 <p className="role-org">{item.organisation}</p>
+                <p className="role-location">{item.location}</p>
                 <p className="role-simple">{item.simple}</p>
+                <div className="role-skills" aria-label="Key skills">{item.skills.slice(0, 3).map((skill) => <span key={skill}>{skill}</span>)}</div>
                 <div className="role-bottom"><span>{item.period}</span><a href={`/details/${item.slug}`} target="_blank" rel="noreferrer">Read the story ↗</a></div>
               </article>
             ))}
