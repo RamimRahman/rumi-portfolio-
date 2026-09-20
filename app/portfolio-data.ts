@@ -3,6 +3,7 @@ export type Experience = {
   role: string;
   organisation: string;
   period: string;
+  location: string;
   status: "Current" | "Past";
   kind: string;
   simple: string;
@@ -16,8 +17,9 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     slug: "lsbu-energy-advice-centre",
-    role: "Community Energy Advice",
+    role: "LSBU Energy Advice Centre: Supporting the Community with Free Energy Advice",
     organisation: "Energy Advice Centre at LSBU",
+    location: "London Area, United Kingdom",
     period: "August 2026 — Present",
     status: "Current",
     kind: "Part-time · On-site",
@@ -40,11 +42,12 @@ export const experiences: Experience[] = [
   },
   {
     slug: "lead-representative",
-    role: "Lead Representative",
-    organisation: "London South Bank University",
+    role: "Lead Representative | Computer Science and Digital Technologies",
+    organisation: "South Bank Students’ Union",
+    location: "London Area, United Kingdom",
     period: "April 2026 — Present",
     status: "Current",
-    kind: "Student leadership",
+    kind: "Contract · Hybrid",
     simple: "I listen to Computer Science students, find the biggest problems and help the university act on them.",
     story:
       "Rumi represents students across Computer Science and Digital Technologies. He gathers feedback, spots repeated themes and brings the important points to academic staff and the Students’ Union in a clear, constructive way.",
@@ -63,60 +66,13 @@ export const experiences: Experience[] = [
     accent: "violet",
   },
   {
-    slug: "csi-ambassador",
-    role: "CSI Outreach Student Ambassador",
-    organisation: "London South Bank University",
-    period: "November 2025 — Present",
-    status: "Current",
-    kind: "Outreach",
-    simple: "I help young people understand online safety without using confusing technical language.",
-    story:
-      "Rumi delivers friendly, hands-on sessions about cybersecurity, online safety and digital wellbeing for school and college students. His job is to make technical ideas feel simple, useful and safe to ask questions about.",
-    actions: [
-      "Deliver interactive cyber-awareness sessions",
-      "Support practical activities for different age groups",
-      "Represent LSBU at campus and community events",
-      "Work with academic staff and other ambassadors",
-    ],
-    outcomes: [
-      "Technical ideas become easier to understand",
-      "Young visitors feel welcome on campus",
-      "More students see a possible future in technology",
-    ],
-    skills: ["Public speaking", "Cyber awareness", "Inclusive communication", "Event support"],
-    accent: "cyan",
-  },
-  {
-    slug: "meamo",
-    role: "Digital Marketing & Social Media Assistant",
-    organisation: "Meamo Ltd",
-    period: "January 2025 — Present",
-    status: "Current",
-    kind: "Digital business",
-    simple: "I make products easier to find, understand and trust online.",
-    story:
-      "At Meamo, Rumi combines product research, clear writing, visual design and AI-assisted tools to improve e-commerce content. He also supports reporting, promotions and customer enquiries.",
-    actions: [
-      "Research products and customer needs",
-      "Improve product titles, descriptions and images",
-      "Use AI tools to speed up careful creative work",
-      "Track stock and simple performance reports in Excel",
-    ],
-    outcomes: [
-      "Clearer and more useful product listings",
-      "A stronger and more consistent visual identity",
-      "Improved performance on selected listings",
-    ],
-    skills: ["Digital marketing", "Product optimisation", "AI workflows", "E-commerce"],
-    accent: "coral",
-  },
-  {
     slug: "encode-hub-scholar",
-    role: "Hub Scholar",
+    role: "Hub Scholar – Encode Club",
     organisation: "Encode Club",
+    location: "London, United Kingdom",
     period: "April 2026 — Present",
     status: "Current",
-    kind: "Technology community",
+    kind: "Internship · On-site",
     simple: "I help tech events run smoothly and make new people feel part of the community.",
     story:
       "As an Encode Hub Scholar, Rumi supports events that bring developers, builders and startup founders together. He helps with planning, setup, ideas and the small human details that make a community experience work.",
@@ -136,14 +92,15 @@ export const experiences: Experience[] = [
   },
   {
     slug: "zeroday",
-    role: "Founder · Digital Outreach & Campaign Lead",
+    role: "Social Media & Outreach Officer",
     organisation: "LSBU ZeroDay",
-    period: "September 2025 — Present",
-    status: "Current",
-    kind: "Community & campaigns",
-    simple: "I helped turn a small idea into an award-winning student community.",
+    location: "London Area, United Kingdom",
+    period: "February 2025 — September 2026",
+    status: "Past",
+    kind: "Apprenticeship · Hybrid",
+    simple: "I built the digital voice of a student cybersecurity community through content, events and outreach.",
     story:
-      "ZeroDay was built to help students learn, connect and grow around cybersecurity. Rumi shapes its digital voice, creates content, promotes events and works with the team on workshops and awareness campaigns.",
+      "ZeroDay was built to help students learn, connect and grow around cybersecurity. Rumi shaped its digital voice, created content, promoted events and worked with the team on workshops and awareness campaigns.",
     actions: [
       "Build and manage the club’s digital presence",
       "Create content and promote events",
@@ -157,6 +114,139 @@ export const experiences: Experience[] = [
     ],
     skills: ["Brand building", "Campaigns", "Social media", "Community leadership"],
     accent: "lime",
+  },
+  {
+    slug: "csi-ambassador",
+    role: "CSI Ambassador",
+    organisation: "London South Bank University",
+    location: "London, United Kingdom",
+    period: "December 2025 — August 2026",
+    status: "Past",
+    kind: "Contract · Hybrid",
+    simple: "I made cyber awareness, online safety and digital wellbeing accessible through student outreach.",
+    story:
+      "Rumi supported cyber-awareness initiatives through student outreach and practical learning sessions. He promoted online safety and digital wellbeing, using clear communication to make cybersecurity accessible.",
+    actions: [
+      "Deliver interactive cyber-awareness sessions",
+      "Support practical activities for different age groups",
+      "Represent LSBU at campus and community events",
+      "Work with academic staff and other ambassadors",
+    ],
+    outcomes: [
+      "Technical ideas become easier to understand",
+      "Young visitors feel welcome on campus",
+      "More students see a possible future in technology",
+    ],
+    skills: ["Public speaking", "Cyber awareness", "Inclusive communication", "Event support"],
+    accent: "cyan",
+  },
+
+  {
+    slug: "meamo",
+    role: "Digital Marketing and Social Media Assistant (Volunteer)",
+    organisation: "Meamo",
+    location: "Basildon, England, United Kingdom",
+    period: "2024 — February 2026",
+    status: "Past",
+    kind: "Apprenticeship · Hybrid",
+    simple: "I combined creative content, AI tools and product visuals to strengthen an online brand.",
+    story:
+      "At Meamo, Rumi collaborated on creative digital projects, using AI tools to improve product visuals and content. He optimised product listings and visual branding, bringing together creativity and technology to strengthen the team’s online presence.",
+    actions: [
+      "Research products and customer needs",
+      "Improve product titles, descriptions and images",
+      "Use AI tools to speed up careful creative work",
+      "Collaborate with the team on creative digital ideas",
+    ],
+    outcomes: [
+      "Clearer and more useful product listings",
+      "A stronger and more consistent visual identity",
+      "Practical experience combining creative work with AI tools",
+    ],
+    skills: ["Digital marketing", "Product optimisation", "AI workflows", "E-commerce"],
+    accent: "coral",
+  },
+  {
+    "slug": "school-ambassador",
+    "role": "School Ambassador | Outreach & Community Engagement Lead",
+    "organisation": "St. Gregory’s High School & College",
+    "period": "January 2019 — December 2021",
+    "location": "Dhaka, Bangladesh",
+    "status": "Past",
+    "kind": "Apprenticeship · Hybrid",
+    "simple": "I welcomed future students and brought people together through school events and outreach.",
+    "story": "As a School Ambassador at St. Gregory’s, Rumi represented the school at open days and inter-school events. He collaborated with teachers and student leaders on educational initiatives, building relationships with prospective students and partner schools.",
+    "actions": [
+      "Represent the school at open days and inter-school events",
+      "Collaborate with teachers and student leaders",
+      "Coordinate science fairs, IT events and workshops",
+      "Welcome prospective students and promote school activities"
+    ],
+    "outcomes": [
+      "More opportunities for student participation and learning",
+      "Practical experience in outreach and event coordination"
+    ],
+    "skills": [
+      "Communication",
+      "Community engagement",
+      "Event coordination",
+      "Team management"
+    ],
+    "accent": "violet"
+  },
+  {
+    "slug": "science-club-president",
+    "role": "President | Science Club",
+    "organisation": "St. Gregory’s High School & College",
+    "period": "January 2018 — December 2019",
+    "location": "Dhaka, Bangladesh",
+    "status": "Past",
+    "kind": "Apprenticeship · Hybrid",
+    "simple": "I led a student committee creating science fairs, STEM workshops and technology exhibitions.",
+    "story": "Rumi led the Science Club at St. Gregory’s, overseeing a committee of student volunteers. He worked with teachers, sponsors and external organisations to organise events that encouraged scientific inquiry and participation in innovation.",
+    "actions": [
+      "Lead a committee of student volunteers",
+      "Plan science fairs, STEM workshops and technology exhibitions",
+      "Coordinate with teachers, sponsors and external organisations"
+    ],
+    "outcomes": [
+      "Created opportunities for students to explore science and innovation",
+      "Developed leadership and teamwork through practical projects"
+    ],
+    "skills": [
+      "Leadership",
+      "Team coordination",
+      "Event planning",
+      "STEM outreach"
+    ],
+    "accent": "cyan"
+  },
+  {
+    "slug": "school-volunteering",
+    "role": "Volunteering & Extracurricular Activities",
+    "organisation": "St. Gregory’s High School & College",
+    "period": "February 2015 — October 2018",
+    "location": "Dhaka, Bangladesh",
+    "status": "Past",
+    "kind": "Apprenticeship · On-site",
+    "simple": "I explored practical technology through clubs, coding workshops and an award-winning irrigation project.",
+    "story": "Through school clubs and extracurricular activities, Rumi helped organise coding workshops, quizzes, science fairs and inter-school competitions. Working with teachers and peers, he developed an award-winning automated irrigation system using basic programming and sensors.",
+    "actions": [
+      "Organise coding workshops, quizzes and technology activities",
+      "Support science fairs and inter-school competitions",
+      "Build an automated irrigation system with programming and sensors"
+    ],
+    "outcomes": [
+      "Award-winning automated irrigation project",
+      "Early foundations in teamwork, problem solving and practical technology"
+    ],
+    "skills": [
+      "Teamwork",
+      "Problem solving",
+      "Programming",
+      "Event support"
+    ],
+    "accent": "lime"
   },
 ];
 
@@ -179,7 +269,7 @@ export const journey = [
   {
     year: "2025",
     title: "Creative work meets community",
-    text: "Joined Meamo, launched ZeroDay and became a CSI Outreach Student Ambassador.",
+    text: "Led social media and outreach at ZeroDay and became a CSI Ambassador.",
   },
   {
     year: "2026",

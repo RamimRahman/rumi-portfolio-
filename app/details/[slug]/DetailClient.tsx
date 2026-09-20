@@ -40,7 +40,7 @@ export default function DetailClient({ experience }: { experience: Experience })
             <h1>{experience.role}</h1>
             <p>{experience.organisation}</p>
           </div>
-          <div className="detail-meta"><span>{experience.period}</span><span>{experience.kind}</span><span>London, United Kingdom</span></div>
+          <div className="detail-meta"><span>{experience.period}</span><span>{experience.kind}</span><span>{experience.location}</span></div>
         </section>
 
         <section className={`detail-simple detail-accent-${experience.accent}`}>
@@ -56,7 +56,7 @@ export default function DetailClient({ experience }: { experience: Experience })
 
         <section className="detail-columns">
           <div>
-            <h2>What Rumi does</h2>
+            <h2>{experience.status === "Current" ? "What Rumi does" : "What Rumi did"}</h2>
             <ol>{experience.actions.map((action, index) => <li key={action}><span>{String(index + 1).padStart(2, "0")}</span>{action}</li>)}</ol>
           </div>
           <div>
