@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ContactIcon, emailLinks, socialLinks, zoomRequest } from "./contact-links";
 import {
@@ -23,6 +24,30 @@ const experienceLabels: Record<string, string> = {
 };
 
 const currentExperiences = experiences.filter((item) => item.status === "Current");
+
+const organisations = [
+  { name: "LSBU Energy Advice Centre", image: "/brands/clean/energy-advice.png", tone: "light", fit: "compact" },
+  { name: "South Bank Students’ Union", image: "/brands/source/south-bank-students-union.jpg", tone: "dark", fit: "wide" },
+  { name: "ZeroDay", image: "/brands/clean/zeroday.png", tone: "light", fit: "wide" },
+  { name: "Domino’s", image: "/brands/source/dominos.webp", tone: "light", fit: "compact" },
+  { name: "Encode Club", image: "/brands/clean/encode.png", tone: "light", fit: "wide" },
+  { name: "London South Bank University", image: "/brands/clean/lsbu-crest.png", tone: "light", fit: "wide" },
+  { name: "LSBU", image: "/brands/source/lsbu-wordmark.png", tone: "dark", fit: "compact" },
+  { name: "MEAMO", image: "/brands/source/meamo.png", tone: "dark", fit: "compact" },
+  { name: "St. Gregory’s High School & College", image: "/brands/clean/st-gregorys.png", tone: "light", fit: "compact" },
+] as const;
+
+const experienceBrand: Record<string, string> = {
+  "lsbu-energy-advice-centre": "/brands/clean/energy-advice.png",
+  "lead-representative": "/brands/source/south-bank-students-union.jpg",
+  "encode-hub-scholar": "/brands/clean/encode.png",
+  zeroday: "/brands/clean/zeroday.png",
+  "csi-ambassador": "/brands/source/lsbu-wordmark.png",
+  meamo: "/brands/source/meamo.png",
+  "school-ambassador": "/brands/clean/st-gregorys.png",
+  "science-club-president": "/brands/clean/st-gregorys.png",
+  "school-volunteering": "/brands/clean/st-gregorys.png",
+};
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -54,6 +79,7 @@ export default function Home() {
   const [lightMode, setLightMode] = useState(false);
   const [experienceFilter, setExperienceFilter] = useState<"All" | "Current" | "Past">("All");
   const visibleExperiences = experiences.filter((item) => experienceFilter === "All" || item.status === experienceFilter);
+  const [brandsPaused, setBrandsPaused] = useState(false);
   const [journeyPaused, setJourneyPaused] = useState(false);
   const [loading, setLoading] = useState(true);
   const [activeRecommendation, setActiveRecommendation] = useState(0);
@@ -199,6 +225,38 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="brand-showcase" aria-labelledby="brand-showcase-title">
+          <div className="brand-showcase-head">
+            <div>
+              <p className="brand-eyebrow"><span aria-hidden="true">✦</span> TEAMS, COMMUNITIES &amp; CAMPUSES</p>
+              <h2 id="brand-showcase-title">Places I’ve <em>worked with.</em></h2>
+            </div>
+            <div className="brand-showcase-note">
+              <p>Each logo marks a real chapter—work, leadership, volunteering or a community I helped move forward.</p>
+              <button type="button" aria-pressed={brandsPaused} onClick={() => setBrandsPaused((current) => !current)}>
+                <span aria-hidden="true">{brandsPaused ? "▶" : "Ⅱ"}</span> {brandsPaused ? "Play logos" : "Pause logos"}
+              </button>
+            </div>
+          </div>
+          <div className="brand-rail" data-paused={brandsPaused} tabIndex={0} aria-label="Organisations Rumi has worked with">
+            <div className="brand-marquee">
+              {[false, true].map((duplicate) => (
+                <div className="brand-group" key={String(duplicate)} aria-hidden={duplicate || undefined}>
+                  {organisations.map((organisation, index) => (
+                    <figure className="brand-card" data-tone={organisation.tone} data-fit={organisation.fit} key={`${duplicate}-${organisation.name}`}>
+                      <span className="brand-card-number">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="brand-logo-stage">
+                        <Image src={organisation.image} alt={duplicate ? "" : `${organisation.name} logo`} width={420} height={240} sizes="(max-width: 640px) 180px, 240px" />
+                      </span>
+                      <figcaption>{organisation.name}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="now" id="now">
           <div className="section-heading">
             <div className="experience-intro"><div className="section-tag light"><span>02</span> EXPERIENCE</div><div className="experience-orbit" aria-hidden="true"><i /><b>people<br /><em>×</em> ideas</b><span>ALWAYS BUILDING</span></div></div>
@@ -220,7 +278,7 @@ export default function Home() {
               <details className="experience-row" data-accent={item.accent} key={item.slug}>
                 <summary>
                   <span className="experience-marker" data-current={item.status === "Current"} aria-hidden="true">
-                    {({ "lsbu-energy-advice-centre": "EA", "lead-representative": "SU", "encode-hub-scholar": "EC", zeroday: "ZD", "csi-ambassador": "CSI", meamo: "M", "school-ambassador": "SG", "science-club-president": "SC", "school-volunteering": "IT" } as Record<string, string>)[item.slug]}
+                    <Image src={experienceBrand[item.slug]} alt="" width={44} height={44} />
                   </span>
                   <span className="experience-identity">
                     <span className="experience-title">{experienceLabels[item.slug] || item.role}</span>

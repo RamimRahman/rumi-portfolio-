@@ -144,6 +144,37 @@ button { font: inherit; }
 .value-grid h3 { margin: 5rem 0 .8rem; font-size: clamp(1.7rem, 2.4vw, 2.7rem); line-height: .95; letter-spacing: -.055em; }
 .value-grid p { max-width: 360px; margin: 0; color: var(--muted-light); font-size: .82rem; line-height: 1.55; }
 
+.brand-showcase { position: relative; padding: clamp(4.5rem, 8vw, 8rem) 0 clamp(4rem, 7vw, 7rem); color: white; background: var(--violet); overflow: hidden; }
+.brand-showcase::before { content: ""; position: absolute; top: -8rem; right: -5rem; width: min(40vw, 34rem); aspect-ratio: 1; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; box-shadow: 0 0 0 4rem rgba(255,255,255,.035), 0 0 0 8rem rgba(255,255,255,.025); pointer-events: none; }
+.brand-showcase-head { position: relative; z-index: 1; padding: 0 clamp(1rem, 5vw, 6rem); display: grid; grid-template-columns: 1.35fr .65fr; gap: clamp(2rem, 8vw, 9rem); align-items: end; }
+.brand-eyebrow { margin: 0 0 1.4rem; display: flex; align-items: center; gap: .7rem; color: rgba(255,255,255,.7); font: 750 .57rem/1 var(--font-geist-mono), monospace; letter-spacing: .13em; }
+.brand-eyebrow span { display: grid; place-items: center; width: 30px; aspect-ratio: 1; color: var(--ink); background: var(--lime); border-radius: 50%; font-size: .75rem; }
+.brand-showcase h2 { max-width: 800px; margin: 0; font-size: clamp(3.2rem, 6vw, 6.7rem); line-height: .88; letter-spacing: -.075em; }
+.brand-showcase h2 em { color: var(--lime); font-family: Georgia, serif; font-weight: 400; }
+.brand-showcase-note { max-width: 420px; justify-self: end; }
+.brand-showcase-note p { margin: 0; color: rgba(255,255,255,.76); font-size: .9rem; line-height: 1.65; }
+.brand-showcase-note button { min-height: 44px; margin-top: 1.2rem; padding: .65rem .9rem; display: inline-flex; align-items: center; gap: .55rem; color: white; background: transparent; border: 1px solid rgba(255,255,255,.55); border-radius: 999px; cursor: pointer; font: 700 .55rem/1 var(--font-geist-mono), monospace; letter-spacing: .06em; }
+.brand-showcase-note button:hover { color: var(--ink); background: var(--lime); border-color: var(--lime); }
+.brand-showcase-note button:focus-visible, .brand-rail:focus-visible { outline: 3px solid var(--lime); outline-offset: 5px; }
+.brand-rail { position: relative; z-index: 1; margin-top: clamp(2.5rem, 5vw, 4.5rem); padding: .5rem 0 1.5rem; overflow-x: auto; scrollbar-width: none; }
+.brand-rail::-webkit-scrollbar { display: none; }
+.brand-marquee { width: max-content; display: flex; animation: brand-drift 58s linear infinite; will-change: transform; }
+.brand-group { flex: 0 0 auto; display: flex; gap: .8rem; padding-right: .8rem; }
+.brand-rail:hover .brand-marquee, .brand-rail:focus-within .brand-marquee, .brand-rail[data-paused="true"] .brand-marquee { animation-play-state: paused; }
+.brand-card { position: relative; width: clamp(220px, 20vw, 290px); height: clamp(230px, 21vw, 300px); margin: 0; padding: 1rem; display: grid; grid-template-rows: auto 1fr auto; flex: 0 0 auto; color: var(--ink); background: var(--paper-2); border: 1px solid rgba(255,255,255,.25); border-radius: 22px; box-shadow: 0 18px 50px rgba(35,25,96,.22); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+.brand-card[data-tone="dark"] { color: white; background: #080909; }
+.brand-card::after { content: ""; position: absolute; right: -2.5rem; bottom: -2.5rem; width: 7rem; aspect-ratio: 1; border: 1px solid currentColor; border-radius: 50%; opacity: .08; box-shadow: 0 0 0 1.4rem currentColor; pointer-events: none; }
+.brand-card-number { position: relative; z-index: 1; opacity: .45; font: 750 .52rem/1 var(--font-geist-mono), monospace; letter-spacing: .08em; }
+.brand-logo-stage { min-height: 0; display: grid; place-items: center; }
+.brand-logo-stage img { width: 76%; height: 76%; object-fit: contain; filter: saturate(1.03) contrast(1.02); }
+.brand-card[data-fit="wide"] .brand-logo-stage img { width: 90%; height: 72%; }
+.brand-card figcaption { position: relative; z-index: 1; padding-top: .85rem; border-top: 1px solid currentColor; opacity: .78; font: 700 .53rem/1.35 var(--font-geist-mono), monospace; letter-spacing: .06em; text-transform: uppercase; }
+@media (hover: hover) {
+  .brand-card:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 0 26px 70px rgba(28,20,78,.34); }
+  .brand-card:nth-child(even):hover { transform: translateY(-8px) rotate(1deg); }
+}
+@keyframes brand-drift { to { transform: translateX(-50%); } }
+
 .now { padding: clamp(5rem, 9vw, 9rem) clamp(1rem, 5vw, 6rem); color: var(--paper); background: var(--ink); }
 .section-heading { display: grid; grid-template-columns: .7fr 1.8fr; gap: 3rem; }
 .section-heading h2 { margin: 0; font-size: clamp(3.5rem, 6.5vw, 7rem); line-height: .88; letter-spacing: -.075em; }
@@ -344,6 +375,10 @@ button { font: inherit; }
   .value-grid article { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line-light); }
   .value-grid article:last-child { border-bottom: 0; }
   .value-grid h3 { margin-top: 2.5rem; }
+  .brand-showcase-head { grid-template-columns: 1fr; gap: 1.5rem; }
+  .brand-showcase-note { justify-self: start; }
+  .brand-card { width: min(68vw, 230px); height: min(72vw, 245px); border-radius: 18px; }
+  .brand-marquee { animation-duration: 48s; }
   .role-grid { margin-inline: -1rem; padding: 0 1rem 1rem; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
   .role-card, .role-card:nth-child(1), .role-card:nth-child(2) { flex: 0 0 min(84vw, 380px); min-height: 360px; scroll-snap-align: start; }
   .journey-controls { grid-column: auto; }
@@ -387,6 +422,7 @@ button { font: inherit; }
   .orbit-b { width: 270px; }
   .signal-proof { right: 0; bottom: 6%; }
   .about-main h2, .section-heading h2, .journey-head h2, .voices-head h2, .education-head h2 { font-size: 3rem; }
+  .brand-showcase h2 { font-size: 3.35rem; }
   .proof-copy { padding: 4rem 1rem; }
   .proof-copy h2 { font-size: 3.2rem; }
   .voice-card blockquote { font-size: 2.2rem; }
@@ -410,6 +446,9 @@ button { font: inherit; }
   .journey-marquee { animation: none !important; transform: none; }
   .journey-group[aria-hidden="true"] { display: none; }
   .journey-controls button { display: none; }
+  .brand-marquee { animation: none !important; transform: none; }
+  .brand-group[aria-hidden="true"] { display: none; }
+  .brand-showcase-note button { display: none; }
   .loader { display: none; }
   .hero-signal { transform: none; }
 }
@@ -503,6 +542,7 @@ button { font: inherit; }
 .experience-row[data-accent="coral"] { --role-accent: #ffa08a; }
 .experience-row summary { grid-template-columns: 52px minmax(0, 1fr) auto 36px; padding: 1.05rem .5rem; gap: 1.2rem; }
 .experience-marker, .experience-marker[data-current="true"] { width: 44px; height: 44px; border: 1px solid color-mix(in srgb, var(--role-accent) 35%, transparent); border-radius: 14px; display: grid; place-items: center; color: var(--role-accent); background: var(--ink); box-shadow: inset 0 0 18px color-mix(in srgb, var(--role-accent) 10%, transparent); font: 650 .7rem var(--font-geist-mono), monospace; transition: transform .25s ease, box-shadow .25s ease; }
+.experience-marker img { width: 82%; height: 82%; object-fit: contain; border-radius: 8px; }
 .experience-identity { border-bottom: 1px solid var(--line-dark); padding-bottom: .8rem; padding-top: .4rem; }
 .experience-title { transition: color .2s ease; }
 .experience-status { color: var(--role-accent); }
