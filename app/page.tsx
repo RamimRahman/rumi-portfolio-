@@ -40,6 +40,7 @@ const personSchema = {
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [lightMode, setLightMode] = useState(false);
+  const [journeyPaused, setJourneyPaused] = useState(false);
   const [loading, setLoading] = useState(true);
   const [activeRecommendation, setActiveRecommendation] = useState(0);
   const [testimonialPaused, setTestimonialPaused] = useState(false);
@@ -207,17 +208,28 @@ export default function Home() {
           <div className="journey-head">
             <div className="section-tag"><span>03</span> THE JOURNEY</div>
             <h2>A clear path from <em>curiosity</em> to impact.</h2>
-            <p>Swipe or scroll sideways. Each step explains what changed.</p>
+            <div className="journey-controls">
+              <p>Each step explains what changed. Pause to explore at your own pace.</p>
+              <button type="button" aria-pressed={journeyPaused} onClick={() => setJourneyPaused(!journeyPaused)}>
+                {journeyPaused ? "Resume journey" : "Pause journey"}
+              </button>
+            </div>
           </div>
-          <div className="journey-track" tabIndex={0} aria-label="Rumi's education and career journey">
-            {journey.map((item, index) => (
-              <article key={item.year}>
-                <div className="journey-node"><span>{index + 1}</span><i /></div>
-                <strong>{item.year}</strong>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            ))}
+          <div className="journey-track" tabIndex={0} aria-label="Rumi's education and career journey" data-paused={journeyPaused}>
+            <div className="journey-marquee">
+              {[false, true].map((duplicate) => (
+                <div className="journey-group" key={String(duplicate)} aria-hidden={duplicate || undefined}>
+                  {journey.map((item, index) => (
+                    <article key={item.year}>
+                      <div className="journey-node"><span>{index + 1}</span><i /></div>
+                      <strong>{item.year}</strong>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </article>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
