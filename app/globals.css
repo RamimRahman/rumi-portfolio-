@@ -169,13 +169,20 @@ button { font: inherit; }
 .journey-section { padding: clamp(5rem, 9vw, 9rem) 0; color: var(--ink); background: var(--paper-2); overflow: hidden; }
 .journey-head { padding: 0 clamp(1rem, 5vw, 6rem); display: grid; grid-template-columns: .7fr 1.8fr .6fr; gap: 3rem; align-items: end; }
 .journey-head h2 { margin: 0; font-size: clamp(3rem, 5.5vw, 6rem); line-height: .92; letter-spacing: -.07em; }
-.journey-head > p { margin: 0; color: var(--muted-light); font-size: .8rem; line-height: 1.5; }
-.journey-track { margin-top: 4.5rem; padding: 0 clamp(1rem, 5vw, 6rem) 1.5rem; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-color: var(--violet) rgba(0,0,0,.1); }
-.journey-track article { flex: 0 0 clamp(260px, 26vw, 390px); min-height: 300px; padding-right: 2.2rem; scroll-snap-align: start; }
+.journey-controls { margin: 0; color: var(--muted-light); font-size: .8rem; line-height: 1.5; }
+.journey-controls p { margin: 0; }
+.journey-controls button { margin-top: .8rem; min-height: 44px; padding: .5rem .9rem; border: 1px solid currentColor; border-radius: 999px; color: var(--violet); background: transparent; font: inherit; cursor: pointer; }
+.journey-controls button:focus-visible, .journey-track:focus-visible { outline: 2px solid var(--violet); outline-offset: 4px; }
+.journey-track { margin-top: 4.5rem; padding-bottom: 1.5rem; overflow-x: auto; scrollbar-color: var(--violet) rgba(0,0,0,.1); }
+.journey-marquee { display: flex; width: max-content; animation: journey-drift 100s linear infinite; }
+.journey-group { display: flex; flex-shrink: 0; }
+.journey-track:hover .journey-marquee, .journey-track:focus-within .journey-marquee, .journey-track[data-paused="true"] .journey-marquee { animation-play-state: paused; }
+@keyframes journey-drift { to { transform: translateX(-50%); } }
+.journey-track article { flex: 0 0 auto; width: clamp(260px, 26vw, 390px); min-height: 300px; padding-right: 2.2rem; scroll-snap-align: start; }
 .journey-node { height: 38px; display: flex; align-items: center; }
 .journey-node span { flex: 0 0 38px; aspect-ratio: 1; display: grid; place-items: center; color: white; background: var(--violet); border-radius: 50%; font: 800 .55rem/1 var(--font-geist-mono), monospace; }
 .journey-node i { height: 1px; flex: 1; background: var(--line-light); }
-.journey-track article:last-child .journey-node i { background: transparent; }
+
 .journey-track article > strong { display: block; margin-top: 2rem; color: var(--violet); font: 800 .62rem/1 var(--font-geist-mono), monospace; letter-spacing: .08em; }
 .journey-track h3 { margin: 1rem 0; font-size: clamp(1.7rem, 2.5vw, 2.7rem); line-height: .98; letter-spacing: -.05em; }
 .journey-track p { max-width: 330px; margin: 0; color: var(--muted-light); font-size: .82rem; line-height: 1.6; }
@@ -309,7 +316,7 @@ button { font: inherit; }
   .hero h1 { font-size: clamp(7rem, 17vw, 11rem); }
   .about-main { grid-template-columns: 1.6fr .7fr; }
   .journey-head { grid-template-columns: .55fr 1.6fr; }
-  .journey-head > p { grid-column: 2; }
+  .journey-controls { grid-column: 2; }
   .detail-hero { grid-template-columns: .35fr 1.65fr; }
   .detail-meta { grid-column: 2; }
   .detail-story { grid-template-columns: .5fr 1.5fr; }
@@ -339,8 +346,8 @@ button { font: inherit; }
   .value-grid h3 { margin-top: 2.5rem; }
   .role-grid { margin-inline: -1rem; padding: 0 1rem 1rem; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
   .role-card, .role-card:nth-child(1), .role-card:nth-child(2) { flex: 0 0 min(84vw, 380px); min-height: 360px; scroll-snap-align: start; }
-  .journey-head > p { grid-column: auto; }
-  .journey-track article { flex-basis: min(78vw, 330px); }
+  .journey-controls { grid-column: auto; }
+  .journey-track article { width: min(78vw, 330px); }
   .proof-story { grid-template-columns: 1fr; }
   .proof-art { min-height: 380px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.25); }
   .proof-art::before { width: 370px; }
@@ -400,6 +407,9 @@ button { font: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .journey-marquee { animation: none !important; transform: none; }
+  .journey-group[aria-hidden="true"] { display: none; }
+  .journey-controls button { display: none; }
   .loader { display: none; }
   .hero-signal { transform: none; }
 }
