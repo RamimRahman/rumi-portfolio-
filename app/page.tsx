@@ -10,6 +10,18 @@ import {
   recommendations,
 } from "./portfolio-data";
 
+const experienceLabels: Record<string, string> = {
+  "lsbu-energy-advice-centre": "Community energy advice",
+  "lead-representative": "Lead Representative",
+  "encode-hub-scholar": "Hub Scholar",
+  "zeroday": "Social Media & Outreach Officer",
+  "csi-ambassador": "CSI Ambassador",
+  "meamo": "Digital Marketing & Social Media",
+  "school-ambassador": "School Ambassador",
+  "science-club-president": "Science Club President",
+  "school-volunteering": "Volunteering & extracurriculars",
+};
+
 const currentExperiences = experiences.filter((item) => item.status === "Current");
 
 const personSchema = {
@@ -190,7 +202,7 @@ export default function Home() {
         <section className="now" id="now">
           <div className="section-heading">
             <div className="section-tag light"><span>02</span> WORK & COMMUNITY EXPERIENCE</div>
-            <div><h2>Different roles.<br /><em>One curious mind.</em></h2><p>From community leadership to creative technology. Explore the work, the people and the skills behind each chapter.</p></div>
+            <div><h2>Experience with <em>purpose.</em></h2><p>Helping people, building communities and making digital ideas useful. Select a role to explore.</p></div>
           </div>
           <div className="experience-toolbar">
             <div className="experience-filters" role="group" aria-label="Filter experience">
@@ -204,17 +216,23 @@ export default function Home() {
           </div>
           <p className="experience-count" role="status">Showing {visibleExperiences.length} {experienceFilter === "All" ? "roles" : `${experienceFilter.toLowerCase()} roles`}</p>
           <div className="role-grid" id="experience-grid">
-            {visibleExperiences.map((item, index) => (
-              <article className={`role-card accent-${item.accent}`} key={item.slug}>
-                <div className="role-top"><span>{String(index + 1).padStart(2, "0")}</span><i data-status={item.status}>{item.status === "Current" ? "● CURRENT" : "PAST EXPERIENCE"}</i></div>
-                <p className="role-kind">{item.kind}</p>
-                <h3>{item.role}</h3>
-                <p className="role-org">{item.organisation}</p>
-                <p className="role-location">{item.location}</p>
-                <p className="role-simple">{item.simple}</p>
-                <div className="role-skills" aria-label="Key skills">{item.skills.slice(0, 3).map((skill) => <span key={skill}>{skill}</span>)}</div>
-                <div className="role-bottom"><span>{item.period}</span><a href={`/details/${item.slug}`} target="_blank" rel="noreferrer">Read the story ↗</a></div>
-              </article>
+            {visibleExperiences.map((item) => (
+              <details className="experience-row" key={item.slug}>
+                <summary>
+                  <span className="experience-marker" data-current={item.status === "Current"} aria-hidden="true" />
+                  <span className="experience-identity">
+                    <span className="experience-title">{experienceLabels[item.slug] || item.role}</span>
+                    <span className="experience-organisation">{item.organisation}</span>
+                  </span>
+                  <span className="experience-date">{item.period}<span className="experience-status">{item.status === "Current" ? "Currently here" : "Previous role"}</span></span>
+                  <span className="experience-expand" aria-hidden="true">+</span>
+                </summary>
+                <div className="experience-description">
+                  <p>{item.simple}</p>
+                  <span className="experience-context">{item.kind} · {item.location}</span>
+                  <a href={`/details/${item.slug}`}>Explore this role <span aria-hidden="true">→</span><span className="experience-sr-only">: {item.role}</span></a>
+                </div>
+              </details>
             ))}
           </div>
         </section>
