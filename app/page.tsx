@@ -201,8 +201,8 @@ export default function Home() {
 
         <section className="now" id="now">
           <div className="section-heading">
-            <div className="section-tag light"><span>02</span> WORK & COMMUNITY EXPERIENCE</div>
-            <div><h2>Experience with <em>purpose.</em></h2><p>Helping people, building communities and making digital ideas useful. Select a role to explore.</p></div>
+            <div className="experience-intro"><div className="section-tag light"><span>02</span> EXPERIENCE</div><div className="experience-orbit" aria-hidden="true"><i /><b>people<br /><em>×</em> ideas</b><span>ALWAYS BUILDING</span></div></div>
+            <div><h2>Small steps.<br /><em>Real impact.</em></h2><p>A little creativity. A lot of people. Explore the chapters that shaped how I work.</p></div>
           </div>
           <div className="experience-toolbar">
             <div className="experience-filters" role="group" aria-label="Filter experience">
@@ -217,9 +217,11 @@ export default function Home() {
           <p className="experience-count" role="status">Showing {visibleExperiences.length} {experienceFilter === "All" ? "roles" : `${experienceFilter.toLowerCase()} roles`}</p>
           <div className="role-grid" id="experience-grid">
             {visibleExperiences.map((item) => (
-              <details className="experience-row" key={item.slug}>
+              <details className="experience-row" data-accent={item.accent} key={item.slug}>
                 <summary>
-                  <span className="experience-marker" data-current={item.status === "Current"} aria-hidden="true" />
+                  <span className="experience-marker" data-current={item.status === "Current"} aria-hidden="true">
+                    {({ "lsbu-energy-advice-centre": "EA", "lead-representative": "SU", "encode-hub-scholar": "EC", zeroday: "ZD", "csi-ambassador": "CSI", meamo: "M", "school-ambassador": "SG", "science-club-president": "SC", "school-volunteering": "IT" } as Record<string, string>)[item.slug]}
+                  </span>
                   <span className="experience-identity">
                     <span className="experience-title">{experienceLabels[item.slug] || item.role}</span>
                     <span className="experience-organisation">{item.organisation}</span>
@@ -230,6 +232,7 @@ export default function Home() {
                 <div className="experience-description">
                   <p>{item.simple}</p>
                   <span className="experience-context">{item.kind} · {item.location}</span>
+                  <div className="experience-tags" aria-label="Skills">{item.skills.slice(0, 3).map((skill) => <span key={skill}>{skill}</span>)}</div>
                   <a href={`/details/${item.slug}`}>Explore this role <span aria-hidden="true">→</span><span className="experience-sr-only">: {item.role}</span></a>
                 </div>
               </details>
