@@ -163,9 +163,9 @@ export default function Home() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#about">About</a>
+          <a href="#brands">Worked with</a>
           <a href="#now">Experience</a>
           <a href="#journey">Journey</a>
-          <a href="#voices">Voices</a>
         </nav>
         <div className="top-actions">
           <button className="theme-button" type="button" onClick={switchTheme} aria-label={`Switch to ${lightMode ? "dark" : "light"} mode`}>
@@ -225,7 +225,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="brand-showcase" aria-labelledby="brand-showcase-title">
+        <section className="brand-showcase" id="brands" aria-labelledby="brand-showcase-title">
           <div className="brand-showcase-head">
             <div>
               <p className="brand-eyebrow"><span aria-hidden="true">✦</span> TEAMS, COMMUNITIES &amp; CAMPUSES</p>
