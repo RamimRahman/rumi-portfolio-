@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import HeroSequence from "./hero-sequence";
 import { useEffect, useRef, useState } from "react";
 import { ContactIcon, emailLinks, socialLinks, zoomRequest } from "./contact-links";
 import {
@@ -86,20 +87,30 @@ export default function Home() {
   const [testimonialPaused, setTestimonialPaused] = useState(false);
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem("rumi-theme");
-    const alreadyVisited = window.sessionStorage.getItem("rumi-loaded");
-    const skipLoader = Boolean(
-      alreadyVisited || window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-    );
+    let savedTheme = null;
+    try {
+      savedTheme = window.localStorage.getItem("rumi-theme");
+    } catch (err) {}
+    
+    let skipLoader = false;
+    try {
+      skipLoader = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (err) {}
 
     const timer = window.setTimeout(() => {
       if (savedTheme === "light") setLightMode(true);
       setLoading(false);
-      if (!skipLoader) window.sessionStorage.setItem("rumi-loaded", "true");
-    }, skipLoader ? 0 : 1500);
+    }, skipLoader ? 0 : 1800);
 
     return () => window.clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!loading) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [loading]);
 
   useEffect(() => {
     if (testimonialPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -128,7 +139,9 @@ export default function Home() {
 
   const switchTheme = () => {
     setLightMode((current) => {
-      window.localStorage.setItem("rumi-theme", current ? "dark" : "light");
+      try {
+        window.localStorage.setItem("rumi-theme", current ? "dark" : "light");
+      } catch (err) {}
       return !current;
     });
   };
@@ -149,18 +162,20 @@ export default function Home() {
       />
 
       <div className={`loader ${loading ? "visible" : "hidden"}`} aria-hidden={!loading}>
-        <div className="loader-orbit"><span>R</span><i /><i /></div>
-        <p>RUMI / BUILDING THE NEXT IDEA</p>
-        <div className="loader-line"><i /></div>
+        <div className="loader-grid" aria-hidden="true" />
+        <div className="loader-terminal" role="status" aria-label="Loading Rumi’s portfolio">
+          <div className="loader-terminal-bar"><span><i /> RUMI / DIGITAL STUDIO</span><span>SYS.01</span></div>
+          <div className="loader-chip" aria-hidden="true"><span>R<span className="loader-cursor">_</span></span><i /><i /><i /><i /></div>
+          <div className="loader-title">Ideas into<br /><span>reality.</span></div>
+          <div className="loader-status"><span>INITIALISING EXPERIENCE</span><span className="loader-dots">•••</span></div>
+          <div className="loader-line" aria-hidden="true"><i /></div>
+          <div className="loader-footer" aria-hidden="true"><span>CREATIVE MIND. DIGITAL DNA.</span><span>✳</span></div>
+        </div>
       </div>
 
       <div className="pointer-light" aria-hidden="true" />
 
-      <header className="topbar">
-        <a className="brand" href="#top" aria-label="Rumi home">
-          <span>R</span>
-          <strong>RUMI</strong>
-        </a>
+      <header className="topbar" inert={loading}>
         <nav aria-label="Main navigation">
           <a href="#about">About</a>
           <a href="#brands">Worked with</a>
@@ -178,7 +193,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main>
+      <main inert={loading}>
         <section className="hero" id="top">
           <div className="hero-copy">
             <p className="availability"><i /> London · open to opportunities</p>
@@ -190,17 +205,11 @@ export default function Home() {
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#now">See what I do <span>↓</span></a>
-              <a className="button secondary" href="mailto:ramim3.1416@gmail.com?subject=Hello%20Rumi">Ask me something <span>↗</span></a>
+              <a className="button secondary" href={socialLinks[0].href} target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span>↗</span></a>
             </div>
           </div>
 
-          <div className="hero-signal" aria-label="Interactive Rumi identity graphic">
-            <div className="signal-label">CREATIVE × PEOPLE × TECHNOLOGY</div>
-            <div className="signal-orbit orbit-a"><span>LISTEN</span></div>
-            <div className="signal-orbit orbit-b"><span>BUILD</span></div>
-            <div className="signal-core"><span>R</span><i>IDEAS<br />IN MOTION</i></div>
-            <div className="signal-proof"><strong>08</strong><span>REAL LINKEDIN<br />RECOMMENDATIONS</span></div>
-          </div>
+          <HeroSequence />
         </section>
 
         <section className="proof-strip" aria-label="Professional proof">
@@ -383,23 +392,38 @@ export default function Home() {
             <p>HAVE A ROLE, PROJECT OR QUESTION?</p>
             <h2>Let’s turn a quick hello into <em>something useful.</em></h2>
           </div>
-          <div className="contact-icons" aria-label="Social and contact links">
-            <div className="icon-group" role="group" aria-label="Social profiles">
-              {socialLinks.map((link) => <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${link.name} (opens in a new tab)`} title={link.name}><ContactIcon name={link.name} /></a>)}
+          <a className="linkedin-feature" href={socialLinks[0].href} target="_blank" rel="noopener noreferrer">
+            <span className="linkedin-feature-icon"><ContactIcon name="LinkedIn" /></span>
+            <span><small>LET’S CONNECT</small><strong>Connect on LinkedIn</strong><span>Work, ideas, and new opportunities.</span></span>
+            <span className="linkedin-arrow" aria-hidden="true">↗</span>
+          </a>
+          <div className="contact-grid" aria-label="More ways to connect">
+            <div className="contact-column" role="group" aria-labelledby="social-label">
+              <h3 id="social-label">Find me online</h3>
+              <div className="contact-link-grid">
+                {socialLinks.filter((link) => link.name !== "LinkedIn").map((link) => <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${link.name} (opens in a new tab)`}><ContactIcon name={link.name} /><span>{link.name}</span></a>)}
+              </div>
             </div>
-            <div className="icon-group" role="group" aria-label="Email addresses">
-              {emailLinks.map((link) => <a key={link.address} href={`mailto:${link.address}`} aria-label={`${link.name}: ${link.address}`} title={`${link.name}: ${link.address}`}><ContactIcon name={link.icon} /></a>)}
+            <div className="contact-column" role="group" aria-labelledby="email-label">
+              <h3 id="email-label">Send an email</h3>
+              <div className="contact-link-grid">
+                {emailLinks.map((link) => <a key={link.address} href={`mailto:${link.address}`} aria-label={`${link.name}: ${link.address}`}><ContactIcon name={link.icon} /><span>{link.name}</span></a>)}
+              </div>
             </div>
-            <div className="icon-group" role="group" aria-label="Chat, call or meet">
-              <a href="https://wa.me/447342344156" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp: 07342 344156" title="WhatsApp: 07342 344156"><ContactIcon name="WhatsApp" /></a>
-              <a href="tel:+447342344156" aria-label="Call: 07342 344156" title="Call: 07342 344156"><ContactIcon name="Phone" /></a>
-              <a href={zoomRequest} aria-label="Request a Zoom meeting by email" title="Request a Zoom meeting by email"><ContactIcon name="Zoom" /></a>
-              <a href="/rumi-rahman-cv.pdf" download aria-label="Download résumé" title="Download résumé"><ContactIcon name="Download" /></a>
+            <div className="contact-column" role="group" aria-labelledby="chat-label">
+              <h3 id="chat-label">Talk or explore</h3>
+              <div className="contact-link-grid">
+                <a href="https://wa.me/447342344156" target="_blank" rel="noopener noreferrer"><ContactIcon name="WhatsApp" /><span>WhatsApp</span></a>
+                <a href="tel:+447342344156"><ContactIcon name="Phone" /><span>Call me</span></a>
+                <a href={zoomRequest}><ContactIcon name="Zoom" /><span>Book a call</span></a>
+                <a href="/rumi-rahman-cv.pdf" download><ContactIcon name="Download" /><span>Download CV</span></a>
+              </div>
             </div>
           </div>
           <footer className="footer"><div className="brand"><span>R</span><strong>RUMI</strong></div><p>MD SHAH HABIBUR RAHMAN · LONDON, UK</p><a href="#top">Back to top ↑</a></footer>
         </section>
       </main>
+      {!loading && <a className="linkedin-floating" href={socialLinks[0].href} target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn (opens in a new tab)"><ContactIcon name="LinkedIn" /><span>Let’s connect</span><span aria-hidden="true">↗</span></a>}
     </div>
   );
 }

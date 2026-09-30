@@ -8,7 +8,10 @@ export default function DetailClient({ experience }: { experience: Experience })
   const [lightMode, setLightMode] = useState(true);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("rumi-theme");
+    let saved = null;
+    try {
+      saved = window.localStorage.getItem("rumi-theme");
+    } catch (err) {}
     const timer = window.setTimeout(() => {
       if (saved === "dark") setLightMode(false);
     }, 0);
@@ -17,7 +20,9 @@ export default function DetailClient({ experience }: { experience: Experience })
 
   const switchTheme = () => {
     setLightMode((current) => {
-      window.localStorage.setItem("rumi-theme", current ? "dark" : "light");
+      try {
+        window.localStorage.setItem("rumi-theme", current ? "dark" : "light");
+      } catch (err) {}
       return !current;
     });
   };
